@@ -1,0 +1,199 @@
+.navbar
+    width: 100%
+    height: 100px
+    display: flex
+    align-items: center
+    background-color: var(--dark-color)
+    padding: 10px 20px
+
+    .logo
+        width: calc( 100% /12 * 2 )
+        margin: 0
+        text-align: center
+
+        img
+            width: 60%
+
+    .nav-list
+        width: calc( 100% / 12 * 4 )
+        display: flex
+        justify-content: center
+        list-style: none
+        margin-bottom: 0
+
+        .nav-item
+
+        .nav-link
+            color: var(--white-color)
+            text-decoration: none
+            font-size: 20px
+            text-transform: uppercase
+            font-weight: bold
+            padding: 15px 40px
+            border: 2px solid var(--dark-color)
+            letter-spacing: 2px
+            transition: .5s all ease
+
+        .nav-link:hover
+            color: var(--orange-color)
+            border: 2px solid var(--orange-color)
+            border-radius: 10px
+
+    .search-container
+        width: calc( 100% / 12 * 3)
+        border-bottom: 1px solid var(--white-color)
+        position: relative
+
+        .search
+            width: 100%
+            padding: 10px 0
+            font-size: 15px
+            color: var(--white-color)
+            background-color: unset
+            outline: none
+            border: none
+
+        .search::placeholder
+            color: var(--white-color)
+
+        .search-btn
+            position: absolute
+            color: var(--white-color)
+            font-size: 20px
+            top: 5px
+            right: 0
+            cursor: pointer
+
+    .account-container
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        margin-left: 30px
+
+        .language-container
+            color: var(--white-color)
+            display: flex
+            align-items: center
+            justify-content: flex-end
+            position: relative
+            cursor: pointer
+
+            .language-icon
+                cursor: pointer
+                font-size: 20px
+                transition: .5s all ease
+
+            .current-language
+                height: 22px
+                font-size: 16px
+                padding: 0px 5px
+                border-bottom: 1px solid var(--white-color)
+                line-height: 22px
+                margin-bottom: 5px
+                margin-left: 10px
+                margin-right: 10px
+
+            .language-sub-list
+                position: absolute
+                background-color: var(--dark-color)
+                width: 100%
+                top: 100%
+                list-style: none
+                border: 1px solid var(--white-color)
+                border-radius: 5px
+                padding: 0 10px
+                display: flex
+                flex-direction: column
+                li
+                    width: 100%
+                    text-align: center
+                    cursor: pointer
+                    padding: 5px
+                    border-bottom: 1px solid var(--white-color)
+
+                li:last-child
+                    border-bottom: none
+
+                li:hover
+                    color: var(--orange-color)
+                    font-weight: bold
+
+        .account
+            position: relative
+            color: var(--white-color)
+            display: flex
+            justify-content: center
+            align-items: center
+            margin-left: 60px
+            margin-right: 40px
+            cursor: pointer
+
+            .account-avatar
+                width: 40px
+                height: 100%
+
+                img
+                    width: 100%
+                    height: 40px
+                    border-radius: 50%
+
+            .account-icon
+                cursor: pointer
+                transition: .5s all ease
+                margin-left: 10px
+
+            .account-nav-list
+                list-style: none
+                background-color: var(--dark-color)
+                width: 300%
+                position: absolute
+                top: 120%
+                right: -20px
+                padding: 10px 20px
+                border: 1px solid var(--white-color)
+                border-radius: 5px
+
+                li
+
+                    cursor: pointer
+                    padding: 5px
+                    border-bottom: 1px solid var(--white-color)
+
+                    svg
+                        margin-right: 20px
+                        width: 20px
+
+                    a
+                        color: var(--white-color)
+                        text-decoration: none
+
+                    a:hover
+                        color: var(--orange-color)
+                        font-weight: bold
+
+                li:hover
+                    color: var(--orange-color)
+                    font-weight: bold
+
+                li:last-child
+                    border: none
+
+.rotate-0
+    transform: rotateX(0deg)
+    font-size: 12px !important
+    margin-bottom: 4px
+
+.rotate-180
+    transform: rotateX(180deg)
+    font-size: 12px !important
+    margin-bottom: 4px
+
+.link-to-login
+    background-color: var(--blue-color)
+    padding: 10px 20px
+    border-radius: 5px
+    font-weight: bold
+    transition: .3s ease all
+
+.link-to-login:hover
+    background-color: var(--orange-color)

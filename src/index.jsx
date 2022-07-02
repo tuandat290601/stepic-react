@@ -14,10 +14,10 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
       <Routes>
+        <Route path="login" element = {<Login/>}/>
         <Route path="/" element={<App/>}>
           <Route index element = {<Home/>}/>
         </Route>
-        <Route path="login" element = {<Login/>}/>
         <Route path = "game" element = {<Game/>}>
           <Route path = ":id" element = {<GameDetail/>}/>
         </Route>
