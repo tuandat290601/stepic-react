@@ -28,7 +28,17 @@ const Banner = () => {
         setMainBanner(list[id].img)
     }
     useEffect(()=>{
-
+        const timeout = setTimeout(()=>{
+            if(currentBanner === list.length - 1){
+                handleBanner(0)
+            }
+            else {
+                handleBanner(currentBanner + 1)
+            }
+        },2500)
+        return () => {
+            clearTimeout(timeout)
+        }
     })
   return (
     <section className='banner-container'>
