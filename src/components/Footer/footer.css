@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.page_content{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.footer{
+    display: flex;
+    width: 100%;
+    background-color: #151515;
+    height: 20%;
+    justify-content: center;
+    color: #fff;
+}
+.footer .footer_container{
+    width: 60%;
+}
+.footer .footer_head{
+    display: inline-block;
+    height: auto;
+}
+.footer h4{
+    margin-top: 30%;
+    margin-bottom: 5%;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 0.1%;
+    align-items: center;
+    text-transform: uppercase;
+    color: #FF9900;
+}
