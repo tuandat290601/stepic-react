@@ -25,6 +25,7 @@ body{
     height: auto;
 }
 .footer_field h4{
+    position: relative;
     margin-top: 30%;
     margin-bottom: 5%;
     font-style: normal;
@@ -34,6 +35,14 @@ body{
     align-items: center;
     text-transform: uppercase;
     color: #FF9900;
+}
+.footer_field h4::after{
+    position: absolute;
+    left: 0;
+    content: "ABOU";
+    color: #FF9900;
+    text-decoration: underline;
+    text-decoration-thickness: 12%;
 }
 .footer_field .href_content {
     display: flex;
