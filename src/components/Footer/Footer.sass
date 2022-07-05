@@ -6,46 +6,71 @@
     justify-content: center
     color: #fff
 
+    *
+        margin: 0
+        padding: 0
+
     footer
         width: 60%
+        padding: 2% 0 2% 0
         justify-content: center
-        
-            .footer_head
+        display: flex
+        flex-direction: row
+
+        .title
+            color: #FF9900
+            display: inline-block
+
+        .rights
+            flex: 1
+            flex-direction: column
+            margin-right: 5%
+
+            img
+                width: 55%
+
+            p
+                margin-top: 5%
                 display: inline-block
-                height: auto
+                font-weight: 700
+                font-size: 15px
 
-                h4
-                    margin-top: 30%
-                    margin-bottom: 5%
-                    font-style: normal
-                    font-weight: 900
-                    font-size: 32px
-                    line-height: 0.1%
-                    align-items: center
-                    text-transform: uppercase
-                    color: #FF9900
-                
-                h4::after
-                    position: absolute
-                    left: 0
-                    content: "ABOU"
-                    color: #FF9900
-                    text-decoration: underline
-                    text-decoration-thickness: 12%
+        .reference
+            li
+                list-style-type: none
+                margin-top: 5%
 
-            .href_content
-                 display: flex
-                flex-direction: row
+                a
+                    text-decoration: none
+                    font-size: 20px
+                    color: #ccc
+                    font-weight: bold
 
-                .reference
-                    display: flex
-                    flex: 1
+                a:hover
+                        color: #fff
+                        text-decoration: underline
 
+        .special_categories
+            flex: 1
+            padding-left: 5%
+            flex-direction: column
+
+        .socials
+            flex: 1
+            padding-left: 5%
+            flex-direction: column
+
+           .socials_reference
+                li
                     a
                         display: flex
-                        align-items: center
-                        text-decoration: none
-                        color: #ccc
+                        flex-direction: row
 
                         i
-                            margin-right: 10%
+                            margin-right: 5%
+                
+                .facebook_link
+                    a
+                        i
+                            padding-right: 0.5%
+                            padding-left: 0.75%

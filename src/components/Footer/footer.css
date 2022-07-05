@@ -2,62 +2,86 @@ body{
     margin: 0;
     padding: 0;
 }
+
 .page_content{
     width: 100%;
     height: 100vh;
     margin: 0 auto;
     text-align: center;
 }
+
 .footer_field{
     display: flex;
     width: 100%;
     background-color: #151515;
-    height: 20%;
     justify-content: center;
-    color: #fff;
+    color: #ccc;
 }
+.footer_field *{
+    margin: 0;
+    padding: 0;
+}
+
 .footer_field footer{
     width: 60%;
+    padding: 2% 0 2% 0;
     justify-content: center;
-}
-.footer_field .footer_head{
-    display: inline-block;
-    height: auto;
-}
-.footer_field h4{
-    position: relative;
-    margin-top: 30%;
-    margin-bottom: 5%;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 32px;
-    line-height: 0.1%;
-    align-items: center;
-    text-transform: uppercase;
-    color: #FF9900;
-}
-.footer_field h4::after{
-    position: absolute;
-    left: 0;
-    content: "ABOU";
-    color: #FF9900;
-    text-decoration: underline;
-    text-decoration-thickness: 12%;
-}
-.footer_field .href_content {
     display: flex;
     flex-direction: row;
 }
-.footer_field .href_content .reference{
-    display: flex;
+
+.footer_field footer .rights{
     flex: 1;
+    flex-direction: column;
+    margin-right: 5%;
 }
-.footer_field .href_content .reference a{
-    display: flex;
-    align-items: center;
+.footer_field footer .rights img{
+    width: 55%;
+}
+.footer_field footer .rights p{
+    margin-top: 5%;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.footer_field footer .title{
+    color: #FF9900;
+    display: inline-block;
+}
+.footer_field footer .reference li{
+    list-style-type: none;
+    margin-top: 5%;
+}
+.footer_field footer .reference li a{
     text-decoration: none;
+    font-size: 20px;
     color: #ccc;
+    font-weight: bold;
 }
-.footer_field .href_content .reference a i{
-    margin-right: 10%;
+.footer_field footer .reference li a:hover{
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer_field footer .special_categories{
+    flex: 1;
+    padding-left: 5%;
+    flex-direction: column;
+}
+.footer_field footer .socials{
+    flex: 1;
+    padding-left: 5%;
+    flex-direction: column;
+}
+.footer_field footer .socials .socials_reference li a{
+    display: flex;
+    flex-direction: row;
+}
+.footer_field footer .socials .socials_reference li a i{
+    margin-right: 5%;
+}
+.footer_field footer .socials .socials_reference .facebook_link a i{
+    padding-right: 0.5%;
+    padding-left: 0.75%;
 }
