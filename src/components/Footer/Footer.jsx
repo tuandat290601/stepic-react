@@ -51,13 +51,13 @@ const Footer = () => {
                 <ul class="reference socials_reference">
                     <li class="youtube_link">
                         <a href="youtu.be/stepic">
-                            <i class="i yti fab fa-youtube"></i>
+                            <FaYoutube/>
                             <p>youtu.be/stepic</p>
                         </a>
                     </li>
                     <li class="facebook_link">
                         <a href="facebook.com/stepic">
-                            <i class="i fbi fab fa-facebook-square"></i>
+                            <FaFacebookSquare/>
                             <p>facebook.com/stepic</p>
                         </a>
                     </li>
