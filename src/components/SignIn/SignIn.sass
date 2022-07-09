@@ -24,7 +24,7 @@
     .input-container
         width: 100%
         padding: 5px
-        margin-bottom: 5px
+        margin-bottom: 10px
         position: relative
         .info-input
             width: 100%
@@ -39,19 +39,30 @@
         .hidden
             position: absolute
             right: 20px
-            top: 27%
+            top: 20%
         .hidden:hover
             cursor: pointer
-.login-btn
-    width: calc( 100% - 10px )
-    height: 50px
-    color: #fff
-    background-color: #ff9900
-    font-size: 17px
-    font-weight: bold
-    margin-top: 5px
-    border-radius: 6px
-    cursor: pointer
+.login-btn-container
+    width: 100%
+    text-align: center
+    position: relative
+    .login-btn
+        width: calc( 100% - 10px )
+        height: 50px
+        color: #fff
+        background-color: #ff9900
+        font-size: 17px
+        font-weight: bold
+        margin-top: 5px
+        margin-bottom: 15px
+        border-radius: 6px
+        cursor: pointer
+.alert
+    position: absolute
+    color: red
+    width: 100%
+    bottom: -45px
+    left: 0
 .link
     font-size: 12px
     margin-top: 10px
@@ -62,7 +73,7 @@
         color: #ff9900
 .signin-btns-container
     display: flex
-    margin-top: 20px
+    margin-top: 10px
     button
         margin: 0 10px
 .google
