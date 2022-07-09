@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currentUser: "",
-    form:"signin",
+    currentPage: "home",
+    form: "signin",
 }
 
 const loginSlice = createSlice({
@@ -15,9 +16,9 @@ const loginSlice = createSlice({
         setForm: (state, action) => {
             state.form = action.payload
             console.log(state.form)
-        }
+        },
     }
 })
 
-export const {setCurrentUser, setForm} = loginSlice.actions
+export const { setCurrentUser, setForm } = loginSlice.actions
 export default loginSlice.reducer;
