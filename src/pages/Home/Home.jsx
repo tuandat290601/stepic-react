@@ -1,5 +1,5 @@
 import React from 'react'
-import {Banner} from '../../components'
+import {Banner, Carousel} from '../../components'
 
 import "./Home.sass"
 
@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <main className='home'>
       <Banner/>
+      <Carousel/>
     </main>
   )
 }
