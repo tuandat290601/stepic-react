@@ -26,19 +26,19 @@ const Footer = () => {
                 
                 <ul class="reference special_categories_reference">
                     <li class="top_discount">
-                        <a href="">
+                        <Link className="reference_link" to="top_discount">
                             <p>Top discount</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="news">
-                        <a href="">
+                        <Link className="reference_link" to="new_releases">
                             <p>New releases</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="hot">
-                        <a href="">
+                        <Link className="reference_link"to="hot">
                             <p>High rating</p>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -50,16 +50,16 @@ const Footer = () => {
 
                 <ul class="reference socials_reference">
                     <li class="youtube_link">
-                        <a href="youtu.be/stepic">
+                        <Link className="reference_link" to="youtu.be/stepic">
                             <FaYoutube/>
                             <p>youtu.be/stepic</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="facebook_link">
-                        <a href="facebook.com/stepic">
+                        <Link className="reference_link" to="facebook.com/stepic">
                             <FaFacebookSquare/>
                             <p>facebook.com/stepic</p>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
