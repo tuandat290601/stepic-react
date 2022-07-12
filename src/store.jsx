@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { loginReducer, navbarReducer } from "./features";
+import { loginReducer, navbarReducer, productReducer } from "./features";
 
 export const store = configureStore({
     reducer: {
         login: loginReducer,
-        navbar: navbarReducer
+        navbar: navbarReducer,
+        product: productReducer
     }
 })

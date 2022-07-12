@@ -94,7 +94,7 @@ const SignUp = () => {
           </div>
         </div>
         <div className="input-container">
-          <div className="policy-container" onClick={() => setAgreement(!agreement)}>
+          <div className="policy-container">
             <input type="checkbox" name="policy" id="policy" onClick={(e) => setAgreement(e.target.checked)} />
             <label htmlFor="policy">I accept the Terms of Use & Privacy Policy</label>
           </div>

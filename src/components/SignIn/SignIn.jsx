@@ -5,7 +5,7 @@ import { setForm } from "../../features/login/loginSlice"
 import API from "../../common/API/API"
 
 import "./SignIn.sass"
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -19,26 +19,21 @@ const SignIn = () => {
     setLoginState(status)
   }
 
-  const navigateBack = () => {
-    if (loginState === 200) {
-      <Navigate to="/" />
-    }
-  }
-
   const checkAccount = async (e, p) => {
-    await API.post("/auth / login",
-      JSON.stringify({
-        email: e,
-        password: p,
-      }
-      )
-    ).then(res => {
-      setStatus(res.status)
-      console.log(res.status)
-    }).catch(err => {
-      console.log(err)
-      setStatus(err.response.status)
-    })
+    await API.get("/product").then(res => console.log(res))
+    // await API.post("/auth/login",
+    //   JSON.stringify({
+    //     email: e,
+    //     password: p,
+    //   }
+    //   )
+    // ).then(res => {
+    //   setStatus(res.status)
+    //   console.log(res)
+    // }).catch(err => {
+    //   console.log(err)
+    //   setStatus(err.response.status)
+    // })
   }
 
   const handleSubmit = async (e) => {
@@ -46,6 +41,11 @@ const SignIn = () => {
     await checkAccount(email, password)
   }
 
+  //nvigate to Home when logged in
+  // let navigate = useNavigate()
+  // if (loginState === 200) {
+  //   navigate("/")
+  // }
 
   return (
     <form className='login-form' onSubmit={handleSubmit}>
