@@ -1,9 +1,12 @@
 import React, {useEffect, useState,} from "react";
 import Flickity from "react-flickity-component";
+import { Link } from "react-router-dom";
 import API from "../../common/API/API"
+import "./Carousel.sass";
 
 const Carousel = () =>{
     const [list, setList] = useState([])
+    const [currentGame, setCurrentGame] = useState(0)
     const assignData = async (data) => {
         setList(data)
     }
@@ -15,30 +18,33 @@ const Carousel = () =>{
             console.log(err)
         })
     };
-    useEffect(()=>{
+    useEffect(() => {
         getGame()
-    })
+    }, [])
     const flickityOptions = {
         initialIndex: 0,
         autoPlay: 3000,
-        wrapAround: true,
+        groupCells: true
       };
     return(
         <>
         {list.length!==0 ? <section className='carousel'>
-            <div className="Hot game">
-                <span>Hot</span>game
+            <div className="title">
+                <span>Hot</span> Game
             </div>
             <div className="carousel-container">
                 <Flickity options={flickityOptions}>
-                    {setList.map((game) =>{
-                        const{
+                    {list.map((game) =>{
+                        const{  
                             id,
-
-                        } = game
+                            name,
+                            gameImage
+                        } = game;
                         return (
                             <div key={id} className="carousel-card">
-                                <img></img>
+                                <Link to ={"/product/"+`${id}`}>
+                                <img src ={gameImage} alt={name}/>
+                                </Link>
                             </div>
                         )
                     })}
