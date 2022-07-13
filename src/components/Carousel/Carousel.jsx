@@ -24,11 +24,11 @@ const Carousel = () =>{
     const flickityOptions = {
         initialIndex: 0,
         autoPlay: 3000,
+        wrapAround: true,
         groupCells: true
       };
     return(
-        <>
-        {list.length!==0 ? <section className='carousel'>
+        <section className='carousel'>
             <div className="title">
                 <span>Hot</span> Game
             </div>
@@ -50,8 +50,7 @@ const Carousel = () =>{
                     })}
                 </Flickity>
             </div>
-        </section>:null}
-        </>
+        </section>
     )
 }
 

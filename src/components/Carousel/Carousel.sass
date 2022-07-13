@@ -4,29 +4,135 @@
 
 .title
     color: #fff
+    width: 100%
+    padding-left: 40px
+    font-size: 48px
+    font-weight: bold
+    margin-bottom: 40px
 
-carousel-container
+
+.title span 
+    color:#e4a459
+
+.flickity-viewport .is-selected
+    opacity: 1  
+
+.carousel-container
     width: 100%
     position: relative
 
-.flickity-button 
-    background-color: #fff
-    transition: .5s all ease
 
-.flickity-button:hover 
-    cursor: pointer
-    background-color: #e4a459
+    .flickity-enabled 
+        outline: none
 
-.prev 
-    width: 70%
-    position: absolute
-    top: 0
-    left: -60%
-    transition: 0.8s ease all
+    .flickity-button 
+        background-color: #fff
+        transition: .5s all ease
 
-.cur 
-    width: 70%
-    margin: auto
-    position: relative
-    transition: 0.8s ease all
+    .flickity-button:hover 
+        cursor: pointer
+        background-color: #e4a459
+
+    .prev 
+        width: 70%
+        position: absolute
+        top: 0
+        left: -60%
+        transition: 0.8s ease all
+
+    .cur 
+        width: 70%
+        margin: auto
+        position: relative
+        transition: 0.8s ease all
+
+    .prev-btn
+        height: 100%
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        top: 0
+        left: -3%
+        z-index: 99
+
+
+    .cur button 
+        width: 50px
+        height: 50px
+        line-height: 50px
+        color: #fff
+        font-size: 18px
+        font-weight: bold
+        border-radius: 50%
+        background-color: #000
+        opacity: 0.3
+        transition: all 0.5s ease
+
+    .cur button:hover 
+        cursor: pointer
+        opacity: 0.8
+        color: #e4a459
+        
+        svg 
+            pointer-events: none
+
+    .carousel-card
+        width: 70%
+        padding: 0 10px
+        opacity: 0.3
+        position: relative
+
+        .img
+            width: 100%
+
+        .next 
+            position: absolute
+            width: 40px
+            height: 40px
+            border-radius: 50%
+            padding: 10px
+            right: 40px
+            top: -90px
+            z-index: 99
+        
+
+        .previous 
+            position: absolute
+            width: 40px
+            height: 40px
+            border-radius: 50%
+            padding: 10px
+            right: 90px
+            top: -90px
+            z-index: 99
+        
+
+        .flickity-page-dots 
+            display: flex
+            justify-content: center
+            margin-top: 10px
+            list-style: none
+        
+
+        .flickity-page-dots:hover 
+            cursor: pointer
+        
+
+        .flickity-page-dots .is-selected 
+            background-color: #e4a459
+        
+
+        .dot 
+            width: 10px
+            height: 10p
+            background-color: #fff
+            border-radius: 50px
+            margin: 5px
+
+        .dot::marker 
+            display: none !important
+        
+
+
 
