@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from "react-redux"
 import "./Banner.sass"
-
+import {Link} from "react-router-dom"
 import { BsArrowRight } from "react-icons/bs";
 
 const Banner = () => {
@@ -70,7 +70,7 @@ const Banner = () => {
                             </div>
                             <div className="main-banner-btn-container">
                                 <button className='main-banner-btn blue-background'>Add to Cart</button>
-                                <button className='main-banner-btn orange-background'>Buy now</button>
+                                <Link to ={`/game/${list[currentBanner].id}`} className='main-banner-btn orange-background'>Buy now</Link>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,4 @@ import GameDetail from "./GameDetail/GameDetail"
 import Payment from "./Payment/Payment"
 import Error from "./Error/Error"
 
-export {Home, Login,Game,
-GameDetail,
-Payment, Error}
+export {Home, Login,Game,GameDetail,Payment, Error}
