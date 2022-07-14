@@ -11,7 +11,7 @@ import "./Home.sass"
 
 const Home = () => {
   const dispatch = useDispatch();
-
+  const {productList} = useSelector(store => store.product)
   const getProducts = async () => {
     let res = await API.get("/product")
     dispatch(setProductList(res.data))
@@ -20,15 +20,13 @@ const Home = () => {
   useEffect(()=>{
     getProducts()
   },[])
-  return (
-    <main className='home'>
+  return (<>
+  {productList.length === 0 ? null : <main className='home'>
       <Banner/>
-
       <Carousel/>
-
       <HomeCategory/>
-
-    </main>
+    </main>}                                  
+  </>
   )
 }
 
