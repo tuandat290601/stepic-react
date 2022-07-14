@@ -1,36 +1,42 @@
 import React, {useEffect, useState,} from "react";
 import Flickity from "react-flickity-component";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import API from "../../common/API/API"
+import { formatDate } from "../../ultils/formatDate";
 import "./Carousel.sass";
 
 const Carousel = () =>{
+    const {productList} = useSelector(store => store.product)
     const [list, setList] = useState([])
-    const [currentGame, setCurrentGame] = useState(0)
-    const assignData = async (data) => {
-        setList(data)
-    }
-    const getGame = async () => {
-        await API.get("/product").then(res => {
-            assignData(res.data)
-            console.log(res.data)
-        }).catch(err => {
-            console.log(err)
+
+     const getComingSoon = () => {
+        let currentDate = formatDate(new Date().toISOString().slice(0, 10)).replaceAll("/", "")
+        let newList = [...productList]
+        return newList.filter(product=>{
+            const {publishDate} = product
+            let date = formatDate(publishDate).replaceAll("/", "")
+            console.log(currentDate, date)
+            return date > currentDate
         })
-    };
-    useEffect(() => {
-        getGame()
+    }
+
+
+    useEffect(()=>{
+        let newList = getComingSoon()
+        setList(newList)
     }, [])
+
+    console.log(list)
     const flickityOptions = {
         initialIndex: 0,
         autoPlay: 3000,
         wrapAround: true,
-        groupCells: true
+        groupCells: 3
       };
     return(
         <section className='carousel'>
             <div className="title">
-                <span>Hot</span> Games
+                <span>Coming</span> Soon
             </div>
             <div className="carousel-container">
                 <Flickity options={flickityOptions}>
@@ -42,9 +48,8 @@ const Carousel = () =>{
                         } = game;
                         return (
                             <div key={id} className="carousel-card">
-                                <Link to ={"/product/"+`${id}`}>
-                                <img src ={gameImage} alt={name}/>
-                                </Link>
+                                <img src ={gameImage} alt={name}/> 
+                                
                             </div>
                         )
                     })}

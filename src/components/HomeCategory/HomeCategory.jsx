@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {setFilteredProduct} from "../../features/product/productSlice"
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 
+import { formatDate } from '../../ultils/formatDate'
+
 import "./HomeCategory.sass"
 
 const HomeCategory = () => {
@@ -15,7 +17,6 @@ const HomeCategory = () => {
     
     const {productList,filteredProductList} = useSelector(store => store.product)
     const dispatch = useDispatch();
-
     
     const [category, setCategory] = useState("Top Discount")
 
@@ -34,11 +35,12 @@ const HomeCategory = () => {
     }
 
     const getNewRelease = () => {
-        let currentDate = new Date().toISOString().slice(0, 10).replaceAll("-", "")
+        let currentDate = formatDate(new Date().toISOString().slice(0, 10)).replaceAll("/", "")
         let newList = [...productList]
         return newList.filter(product=>{
             const {publishDate} = product
-            let date = publishDate.slice(0,10).replaceAll("/", "")
+            let date = formatDate(publishDate).replaceAll("/", "")
+            console.log(currentDate, date)
             return date <= currentDate
         }).sort((productA, productB)=>{
             return new Date(productB.publishDate) - new Date(productA.publishDate)
@@ -60,7 +62,6 @@ const HomeCategory = () => {
         else if (category === "New Release"){
             setDisplayList(newreleaseList.slice(0,7))
             dispatch(setFilteredProduct(newreleaseList))
-
         }
         else {
             setDisplayList(highrateList.slice(0,7))
