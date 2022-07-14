@@ -15,7 +15,6 @@ const loginSlice = createSlice({
         },
         setForm: (state, action) => {
             state.form = action.payload
-            console.log(state.form)
         },
     }
 })

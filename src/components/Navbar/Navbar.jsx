@@ -10,8 +10,8 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import "./Navbar.sass"
 import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentPage } from '../../features/navbar/navbarSlice';
-import {setFilteredProduct} from "../../features/product/productSlice"
+import { setCurrentPage, setSearchKey } from '../../features/navbar/navbarSlice';
+import {setFilteredProduct, sortProduct} from "../../features/product/productSlice"
 
 const list = [{
   name: "VN",
@@ -45,6 +45,8 @@ const Navbar = () => {
     })
     setSearchValue("")
     dispatch(setFilteredProduct(newList))
+    dispatch(sortProduct("name-increase"))
+    dispatch(setSearchKey(searchValue))
     navigate("/game", {replace: true})
   }
 
@@ -58,7 +60,12 @@ const Navbar = () => {
         </div>
         <ul className="nav-list">
           <li className='nav-item'>
-            <Link to="game" className={currentPage === "game" ? 'nav-link active' : 'nav-link'} onClick={() => dispatch(setCurrentPage("game"))}>game</Link>
+            <Link to="game" className={currentPage === "game" ? 'nav-link active' : 'nav-link'} 
+              onClick={() => {
+                dispatch(setCurrentPage("game"))
+                dispatch(setFilteredProduct(productList))
+                dispatch(sortProduct("name-increase"))
+          }}>game</Link>
           </li>
           <li className='nav-item'>
             <Link to="event" className={currentPage === "event" ? 'nav-link active' : 'nav-link'} onClick={() => dispatch(setCurrentPage("event"))}>event</Link>

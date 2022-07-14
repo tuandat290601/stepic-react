@@ -33,25 +33,23 @@ const SignIn = () => {
     })
   }
 
-  // const getAccountDetail = async (e) => {
-  //   // await API.get("/user",e)
-  //   // .then(res => console.log('getAccountDetail',res))
-  //   // .catch(err=>console.log(err))
-  //   await API.get("/user", {
-      
-  //   })
-  //     .then(res => console.log('getAccountDetail', res))
-  //     .catch(err => console.log(err))
-  // }
+  const getAccountDetail = async (e) => {
+    await API.post("/user", {
+      email: e
+    })
+      .then(res => console.log('getAccountDetail', res))
+      .catch(err => console.log(err))
+  }
 
-  // useEffect(() => {
-  //   if (loginState === 200) {
-  //     getAccountDetail(email)
-  //   }
-  // }, [loginState])
+  useEffect(() => {
+    if (loginState === 200) {
+      getAccountDetail(email)
+    }
+  }, [loginState])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("login")
     await checkAccount(email, password)
   }
 
