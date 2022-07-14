@@ -49,7 +49,7 @@ const Banner = () => {
     })
     return (
         <>
-            {list.length !== 0 ? <section className='banner-container' >
+            <section className='banner-container' >
                 <div className="banner-content" >
 
                     <div className="main-banner-container">
@@ -94,7 +94,7 @@ const Banner = () => {
                         })}
                     </ul>
                 </div >
-            </section> : null}
+            </section>
         </>
     )
 }
