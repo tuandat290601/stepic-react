@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { BsSearch, BsGlobe, BsChevronDown, BsPersonFill, BsCartFill } from "react-icons/bs"
 import { MdLogout } from "react-icons/md";
@@ -11,6 +11,7 @@ import "./Navbar.sass"
 import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../features/navbar/navbarSlice';
+import {setFilteredProduct} from "../../features/product/productSlice"
 
 const list = [{
   name: "VN",
@@ -22,40 +23,55 @@ const list = [{
 
 
 const Navbar = () => {
+  let navigate = useNavigate();
+
+  const {productList, filteredProductList} = useSelector(store=>store.product)
 
   const { currentUser } = useSelector(store => store.login)
 
   const [language, setLanguage] = useState("VN")
   const [languageList, setLanguageList] = useState(false)
   const [accountList, setAccountList] = useState(false)
+  const [searchValue, setSearchValue] = useState("")
 
   const { currentPage } = useSelector(store => store.navbar)
   const dispatch = useDispatch();
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let newList = [...productList]
+    newList = newList.filter((product)=>{
+      return product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.brand.toLowerCase().includes(searchValue.toLowerCase())
+    })
+    setSearchValue("")
+    dispatch(setFilteredProduct(newList))
+    navigate("/game", {replace: true})
+  }
 
   return (
     <>
       {currentPage !== "login" ? <nav className='navbar'>
         <div className="logo">
-          <Link to="/" >
+          <Link to="/" onClick={() => dispatch(setCurrentPage("home"))}>
             <img src="/img/logo.png" alt="" />
           </Link>
         </div>
         <ul className="nav-list">
           <li className='nav-item'>
-            <Link to="game" className='nav-link' >game</Link>
+            <Link to="game" className={currentPage === "game" ? 'nav-link active' : 'nav-link'} onClick={() => dispatch(setCurrentPage("game"))}>game</Link>
           </li>
           <li className='nav-item'>
-            <Link to="event" className='nav-link' >event</Link>
+            <Link to="event" className={currentPage === "event" ? 'nav-link active' : 'nav-link'} onClick={() => dispatch(setCurrentPage("event"))}>event</Link>
           </li>
         </ul>
-        <div className="search-container">
-          <input type="text" className='search' placeholder='Search ...' />
-          <div className="search-btn">
+        <form className="search-container" onSubmit={handleSubmit}>
+          <input value = {searchValue} type="text" className='search' placeholder='Search ...' onChange={(e)=>{setSearchValue(e.target.value)}}/>
+          <button type='submit' className="search-btn">
             <BsSearch />
-          </div>
-        </div>
-        <div className="account-container" onClick={() => { setLanguageList(!languageList) }}>
-          <div className="language-container" >
+          </button>
+        </form>
+        <div className="account-container" >
+          <div className="language-container" onClick={() => { setLanguageList(!languageList) }}>
             <div className="language-icon">
               <BsGlobe />
             </div>
@@ -76,7 +92,7 @@ const Navbar = () => {
               })}
             </ul> : null}
           </div>
-          {currentUser !== "" ? <div className="account" >
+          {currentUser !== null ? <div className="account" onClick={() => { setAccountList(!accountList) }}>
             <div className="account-avatar">
               <img src="https://znews-stc.zdn.vn/static/topic/person/justin.jpg" alt="" />
             </div>

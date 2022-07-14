@@ -5,7 +5,7 @@ import { setForm } from "../../features/login/loginSlice"
 import API from "../../common/API/API"
 
 import "./SignIn.sass"
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -19,14 +19,8 @@ const SignIn = () => {
     setLoginState(status)
   }
 
-  const navigateBack = () => {
-    if (loginState === 200) {
-      <Navigate to="/" />
-    }
-  }
-
   const checkAccount = async (e, p) => {
-    await API.post("/auth / login",
+    await API.post("/auth/login",
       JSON.stringify({
         email: e,
         password: p,
@@ -34,18 +28,38 @@ const SignIn = () => {
       )
     ).then(res => {
       setStatus(res.status)
-      console.log(res.status)
     }).catch(err => {
-      console.log(err)
       setStatus(err.response.status)
     })
   }
+
+  // const getAccountDetail = async (e) => {
+  //   // await API.get("/user",e)
+  //   // .then(res => console.log('getAccountDetail',res))
+  //   // .catch(err=>console.log(err))
+  //   await API.get("/user", {
+      
+  //   })
+  //     .then(res => console.log('getAccountDetail', res))
+  //     .catch(err => console.log(err))
+  // }
+
+  // useEffect(() => {
+  //   if (loginState === 200) {
+  //     getAccountDetail(email)
+  //   }
+  // }, [loginState])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await checkAccount(email, password)
   }
 
+  // navigate to Home when logged in
+  // let navigate = useNavigate()
+  // if (loginState === 200) {
+  //   navigate("/")
+  // }
 
   return (
     <form className='login-form' onSubmit={handleSubmit}>

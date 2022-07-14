@@ -4,5 +4,8 @@ import SignUp from "./SignUp/SignUp"
 import Banner from "./Banner/Banner"
 import ScrollButton from "./ScrollButton/ScrollButton"
 import Carousel from "./Carousel/Carousel"
+import HomeCategory from "./HomeCategory/HomeCategory"
 
-export { Navbar, SignIn, SignUp, Banner, ScrollButton,Carousel }
+
+export { Navbar, SignIn, SignUp, Banner, ScrollButton, HomeCategory, Carousel }
+
