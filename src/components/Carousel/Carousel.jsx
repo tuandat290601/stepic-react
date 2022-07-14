@@ -30,7 +30,7 @@ const Carousel = () =>{
     return(
         <section className='carousel'>
             <div className="title">
-                <span>Hot</span> Game
+                <span>Hot</span> Games
             </div>
             <div className="carousel-container">
                 <Flickity options={flickityOptions}>
