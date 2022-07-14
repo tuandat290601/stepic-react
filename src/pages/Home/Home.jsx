@@ -1,8 +1,12 @@
+
+import React from 'react'
+
 import React, {useState, useEffect} from 'react'
-import {Banner, HomeCategory} from '../../components'
+import {Banner, HomeCategory, Carousel} from '../../components'
 import API from '../../common/API/API'
 import { setProductList, setFilteredProduct } from '../../features/product/productSlice'
 import {useDispatch, useSelector } from 'react-redux';
+
 
 import "./Home.sass"
 
@@ -20,7 +24,11 @@ const Home = () => {
   return (
     <main className='home'>
       <Banner/>
+
+      <Carousel/>
+
       <HomeCategory/>
+
     </main>
   )
 }
