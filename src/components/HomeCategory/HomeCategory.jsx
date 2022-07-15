@@ -53,6 +53,10 @@ const HomeCategory = () => {
         setHighrateList(getHighRating())
     },[productList])
 
+    useEffect(()=>{
+        setDiscountList(getDiscountList())
+    },[])
+
     
     const handleCategoryList = () => {
         if(category === "Top Discount"){
