@@ -15,7 +15,6 @@ const Carousel = () =>{
         return newList.filter(product=>{
             const {publishDate} = product
             let date = formatDate(publishDate).replaceAll("/", "")
-            console.log(currentDate, date)
             return date > currentDate
         })
     }
@@ -26,7 +25,6 @@ const Carousel = () =>{
         setList(newList)
     }, [])
 
-    console.log(list)
     const flickityOptions = {
         initialIndex: 0,
         autoPlay: 3000,

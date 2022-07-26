@@ -40,7 +40,6 @@ const HomeCategory = () => {
         return newList.filter(product=>{
             const {publishDate} = product
             let date = formatDate(publishDate).replaceAll("/", "")
-            console.log(currentDate, date)
             return date <= currentDate
         }).sort((productA, productB)=>{
             return new Date(productB.publishDate) - new Date(productA.publishDate)

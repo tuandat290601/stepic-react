@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { FaGooglePlusG, FaFacebookF } from "react-icons/fa";
-import { setForm } from "../../features/login/loginSlice"
+import { setForm, setCurrentUser } from "../../features/login/loginSlice"
+import { setCurrentPage } from '../../features/navbar/navbarSlice';
 import API from "../../common/API/API"
 
 import "./SignIn.sass"
@@ -34,10 +35,9 @@ const SignIn = () => {
   }
 
   const getAccountDetail = async (e) => {
-    await API.post("/user", {
-      email: e
-    })
-      .then(res => console.log('getAccountDetail', res))
+    let api = "/user/" + e
+    await API.get(api)
+      .then(res => dispatch(setCurrentUser(res.data.Data)))
       .catch(err => console.log(err))
   }
 
@@ -49,15 +49,19 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("login")
     await checkAccount(email, password)
   }
 
+  const handleNavigate = () => {
+    setCurrentPage("home")
+  }
+
   // navigate to Home when logged in
-  // let navigate = useNavigate()
-  // if (loginState === 200) {
-  //   navigate("/")
-  // }
+  let navigate = useNavigate()
+  if (loginState === 200) {
+    handleNavigate()
+    navigate("/")
+  }
 
   return (
     <form className='login-form' onSubmit={handleSubmit}>
