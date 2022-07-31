@@ -67,12 +67,56 @@
     font-weight: bold
 .info-container
     width: 100%
-    
-.game-name
+    display: flex
+    margin-top: 20px
+    p
+        padding: 0
+        margin: 0
+    svg
+        margin: 0 5px 5px
+.info-container-left
+    width: 60%
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+.info-name
+    width: 100%
     text-overflow: ellipsis
     white-space: nowrap
     overflow: hidden
     font-weight: bold
+    text-align: start
+.info-price-container
+    width: 100%
+    display: flex
+    align-items: center
+.info-discount
+    color: #ccc
+    text-decoration: line-through
+.info-price
+    background: var(--orange-color)
+    border-radius: 5px
+    padding: 3px !important
+    font-weight: bold
+    color: var(--white-color)
+    
+.info-container-right
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    width: 40%
+    button
+        padding: 10px
+        height: 100%
+        outline: none
+        border: none
+        border-radius: 5px
+        background: var(--blue-color)
+        color: var(--white-color)
+        font-weight: bold
+        transition: .4s all ease
+    button:hover
+        background: var(--orange-color)
 .blur-container
     svg
         margin-left: 10px

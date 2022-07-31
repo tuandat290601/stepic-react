@@ -9,7 +9,9 @@ import GameList from "./GameList/GameList"
 import GameCard from "./GameCard/GameCard"
 import Sort from "./Sort/Sort"
 import Filter from "./Filter/Filter"
+import GameDetailBody from "./GameDetailBody/GameDetailBody"
+import GameDetailHeader from "./GameDetailHeader/GameDetailHeader"
 
 
-export { Navbar, SignIn, SignUp, Banner, ScrollButton, HomeCategory, Carousel, GameList,GameCard,Sort, Filter}
+export { Navbar, SignIn, SignUp, Banner, ScrollButton, HomeCategory, Carousel, GameList, GameCard, Sort, Filter, GameDetailBody, GameDetailHeader }
 
