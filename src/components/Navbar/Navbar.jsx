@@ -11,7 +11,7 @@ import "./Navbar.sass"
 import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPage, setSearchKey } from '../../features/navbar/navbarSlice';
-import {setFilteredProduct, sortProduct} from "../../features/product/productSlice"
+import { setFilteredProduct, sortProduct } from "../../features/product/productSlice"
 
 const list = [{
   name: "VN",
@@ -25,7 +25,7 @@ const list = [{
 const Navbar = () => {
   let navigate = useNavigate();
 
-  const {productList, filteredProductList} = useSelector(store=>store.product)
+  const { productList, filteredProductList } = useSelector(store => store.product)
 
   const { currentUser } = useSelector(store => store.login)
 
@@ -36,18 +36,19 @@ const Navbar = () => {
 
   const { currentPage } = useSelector(store => store.navbar)
   const dispatch = useDispatch();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let newList = [...productList]
-    newList = newList.filter((product)=>{
-      return product.name.toLowerCase().includes(searchValue.toLowerCase()) || product.brand.toLowerCase().includes(searchValue.toLowerCase())
+    let result = newList.filter((product) => {
+      return product.name.toLowerCase().includes(searchValue.toLowerCase()) == true || product.brand.toLowerCase().includes(searchValue.toLowerCase()) == true
     })
+    console.log(result)
     setSearchValue("")
-    dispatch(setFilteredProduct(newList))
+    dispatch(setFilteredProduct(result))
     dispatch(sortProduct("name-increase"))
     dispatch(setSearchKey(searchValue))
-    navigate("/game", {replace: true})
+    navigate("/game", { replace: true })
   }
 
   return (
@@ -60,19 +61,19 @@ const Navbar = () => {
         </div>
         <ul className="nav-list">
           <li className='nav-item'>
-            <Link to="game" className={currentPage === "game" ? 'nav-link active' : 'nav-link'} 
+            <Link to="game" className={currentPage === "game" ? 'nav-link active' : 'nav-link'}
               onClick={() => {
                 dispatch(setCurrentPage("game"))
                 dispatch(setFilteredProduct(productList))
                 dispatch(sortProduct("name-increase"))
-          }}>game</Link>
+              }}>game</Link>
           </li>
           <li className='nav-item'>
             <Link to="event" className={currentPage === "event" ? 'nav-link active' : 'nav-link'} onClick={() => dispatch(setCurrentPage("event"))}>event</Link>
           </li>
         </ul>
         <form className="search-container" onSubmit={handleSubmit}>
-          <input value = {searchValue} type="text" className='search' placeholder='Search ...' onChange={(e)=>{setSearchValue(e.target.value)}}/>
+          <input value={searchValue} type="text" className='search' placeholder='Search ...' onChange={(e) => { setSearchValue(e.target.value) }} />
           <button type='submit' className="search-btn">
             <BsSearch />
           </button>

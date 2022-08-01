@@ -117,6 +117,7 @@ const HomeCategory = () => {
                 <div className="img-container">
                   <img src={gameImage} alt={name} className="game-image" />
                   <div className="blur-container"></div>
+                  {discount === 0 ? null : <div className="discount-tag">-{discount}%</div>}
                 </div>
                 <div className="info-container">
                   <div className="info-container-left">
