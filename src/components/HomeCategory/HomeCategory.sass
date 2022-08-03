@@ -35,12 +35,15 @@
     color: var(--white-color)
     display: flex
     flex-direction: column
+    position: relative
 .home-category-item:hover
     color: var(--orange-color)
 .home-category-item:hover  .blur-container
-    display: none
+    display: flex
 .home-category-item:last-child:hover  .blur-container
     display: flex
+.home-category-item:hover img
+    box-shadow: rgba(191, 191, 204, 0.327) 0px 7px 29px 0px
 
 .img-container
     width: 100%
@@ -58,13 +61,14 @@
     align-items: center
     position: absolute
     width: 100%
-    height: 100%
+    height: 30%
     background-color: #00000097
-    top: 0
+    bottom: 0
     left: 0
     border-radius: 10px
     font-size: 18px
     font-weight: bold
+    padding: 10px
 .discount-tag
     position: absolute
     top: 0
@@ -81,7 +85,6 @@
 .info-container
     width: 100%
     display: flex
-    margin-top: 20px
     p
         padding: 0
         margin: 0
@@ -99,6 +102,9 @@
     overflow: hidden
     font-weight: bold
     text-align: start
+    color: var(--white-color)
+.info-name:hover
+    color: var(--orange-color)
 .info-price-container
     width: 100%
     display: flex
@@ -112,14 +118,15 @@
     padding: 3px !important
     font-weight: bold
     color: var(--white-color)
-    
+
 .info-container-right
     display: flex
     align-items: center
     justify-content: flex-end
     width: 40%
+    position: relative
     button
-        padding: 10px
+        padding: 5px 7px
         height: 100%
         outline: none
         border: none
@@ -128,9 +135,13 @@
         color: var(--white-color)
         font-weight: bold
         transition: .4s all ease
+        position: absolute
+        z-index: 99
     button:hover
         background: var(--orange-color)
 .blur-container
     svg
         margin-left: 10px
         margin-top: 4px
+.disabled
+    background: #ccc !important

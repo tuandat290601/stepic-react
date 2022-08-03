@@ -122,14 +122,41 @@
                 li:hover
                     color: var(--orange-color)
                     font-weight: bold
-
+        .cart-container
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 26px
+            position: relative
+            svg
+                color: var(--white-color)
+                margin-bottom: 5px
+                margin-left: 20px
+                transition: .4s ease all
+            .amount
+                position: absolute
+                width: 20px
+                height: 20px
+                font-size: 12px
+                font-weight: bold
+                color: var(--white-color)
+                background: var(--orange-color)
+                display: flex
+                justify-content: center
+                align-items: center
+                border-radius: 50%
+                right: -5px
+                top: 3px
+        .cart-container:hover
+            svg
+                color: var(--orange-color)
         .account
             position: relative
             color: var(--white-color)
             display: flex
             justify-content: center
             align-items: center
-            margin-left: 60px
+            margin-left: 40px
             margin-right: 40px
             cursor: pointer
 

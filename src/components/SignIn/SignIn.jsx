@@ -15,6 +15,8 @@ const SignIn = () => {
 
   const [loginState, setLoginState] = useState(null)
 
+  let navigate = useNavigate()
+
 
   const setStatus = (status) => {
     setLoginState(status)
@@ -23,8 +25,8 @@ const SignIn = () => {
   const checkAccount = async (e, p) => {
     await API.post("/auth/login",
       JSON.stringify({
-        email: e,
-        password: p,
+        "email": e,
+        "password": p,
       }
       )
     ).then(res => {
@@ -33,17 +35,22 @@ const SignIn = () => {
       setStatus(err.response.status)
     })
   }
-
   const getAccountDetail = async (e) => {
-    let api = "/user/" + e
-    await API.get(api)
-      .then(res => dispatch(setCurrentUser(res.data.Data)))
+    await API.get(`/user/${e}`)
+      .then(res => {
+        dispatch(setCurrentUser(res.data.Data))
+        setLoginState("success")
+      })
       .catch(err => console.log(err))
   }
 
   useEffect(() => {
     if (loginState === 200) {
       getAccountDetail(email)
+    }
+    if (loginState === "success") {
+      dispatch(setCurrentPage("home"))
+      navigate("/")
     }
   }, [loginState])
 
@@ -52,16 +59,6 @@ const SignIn = () => {
     await checkAccount(email, password)
   }
 
-  const handleNavigate = () => {
-    setCurrentPage("home")
-  }
-
-  // navigate to Home when logged in
-  let navigate = useNavigate()
-  if (loginState === 200) {
-    handleNavigate()
-    navigate("/")
-  }
 
   return (
     <form className='login-form' onSubmit={handleSubmit}>

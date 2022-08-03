@@ -22,9 +22,11 @@ const GameCard = (game) => {
                   <BsArrowRight />
                 </p>
               )}
-              <p className="info-price">
+              {price !== 0 ? <p className="info-price">
                 ${price - price * (discount / 100)}
-              </p>
+              </p> : <p className="info-price">
+                Free
+              </p>}
             </div>
           </div>
           <div className="info-container-right">

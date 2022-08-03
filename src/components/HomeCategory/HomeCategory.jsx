@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setFilteredProduct,
   setSingleProduct,
+  setCartProduct,
+  addToCart,
 } from "../../features/product/productSlice";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
@@ -18,9 +20,10 @@ const HomeCategory = () => {
   const [highrateList, setHighrateList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
 
-  const { productList, filteredProductList } = useSelector(
+  const { productList, filteredProductList, cartProduct } = useSelector(
     (store) => store.product
   );
+
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState("Top Discount");
@@ -55,10 +58,12 @@ const HomeCategory = () => {
       });
   };
 
+
   useEffect(() => {
     setDiscountList(getDiscountList());
     setNewreleaseList(getNewRelease());
     setHighrateList(getHighRating());
+
   }, [productList]);
 
   useEffect(() => {
@@ -107,38 +112,49 @@ const HomeCategory = () => {
         <ul className="home-category-list">
           {displayList.map((item, index) => {
             const { id, gameImage, name, price, discount } = item;
+            const added = cartProduct.filter(game => game.id === item.id)
             return (
-              <Link
-                to={`/game/${id}`}
+              <div
                 key={index}
                 className="home-category-item"
-                onClick={() => dispatch(setSingleProduct({ ...item }))}
               >
                 <div className="img-container">
                   <img src={gameImage} alt={name} className="game-image" />
-                  <div className="blur-container"></div>
-                  {discount === 0 ? null : <div className="discount-tag">-{discount}%</div>}
-                </div>
-                <div className="info-container">
-                  <div className="info-container-left">
-                    <p className="info-name">{name}</p>
-                    <div className="info-price-container">
-                      {discount !== 0 && (
-                        <p className="info-discount">
-                          ${discount}
-                          <BsArrowRight />
-                        </p>
-                      )}
-                      <p className="info-price">
-                        ${price - price * (discount / 100)}
-                      </p>
+                  <div className="blur-container">
+                    <div className="info-container">
+                      <div className="info-container-left">
+                        <Link to={`/game/${id}`} className="info-name" onClick={() => dispatch(setSingleProduct({ ...item }))}>{name}</Link>
+                        <div className="info-price-container">
+                          {discount !== 0 && (
+                            <p className="info-discount">
+                              ${discount}
+                              <BsArrowRight />
+                            </p>
+                          )}
+                          {price !== 0 ? <p className="info-price">
+                            ${price - price * (discount / 100)}
+                          </p> : <p className="info-price">
+                            Free
+                          </p>}
+                        </div>
+                      </div>
+                      <div className="info-container-right">
+                        {added.length !== 0 ?
+                          <button className="add-to-cart-btn disabled" >Added</button>
+                          :
+                          <button className="add-to-cart-btn" onClick={() => {
+                            dispatch(addToCart(item))
+                            dispatch(setCartProduct())
+                          }
+                          }>Add to cart</button>
+                        }
+                      </div>
                     </div>
                   </div>
-                  <div className="info-container-right">
-                    <button className="add-to-cart-btn">Add to cart</button>
-                  </div>
+                  {discount === 0 ? null : <div className="discount-tag">-{discount}%</div>}
                 </div>
-              </Link>
+
+              </div>
             );
           })}
           {displayList.length !== 0 && (

@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -6,7 +6,21 @@ import "./GameDetailHeader.sass";
 
 const GameDetailHeader = () => {
   const { singleProduct } = useSelector((store) => store.product);
-  const { name, price, discount, gameImage } = singleProduct;
+  const { name, price, discount, gameImage, shortDesc } = singleProduct;
+
+  const [bought, setBought] = useState(false)
+
+  const { currentUser } = useSelector(store => store.login)
+
+  useEffect(() => { //check whether this account already has this game 
+    if (currentUser) {
+      console.log(currentUser.ownedGame)
+      if (currentUser.ownedGame.map(game => game.id).includes(singleProduct.id)) {
+        setBought(true)
+      }
+    }
+  }, [currentUser])
+
   return (
     <div className="game-detail-header">
       <div className="game-detail-header-container">
@@ -27,10 +41,7 @@ const GameDetailHeader = () => {
             </ul>
           </div>
           <div className="game-detail-description">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-            unde aliquid libero veniam repudiandae autem eius tempore dolorem?
-            Numquam cum neque consequatur facere, quia voluptate optio magnam
-            illum sit doloremque!
+            {shortDesc}
           </div>
           <div className="purchase-container">
             <div className="left">
@@ -55,7 +66,11 @@ const GameDetailHeader = () => {
               )}
             </div>
             <div className="right">
-              <button className="purchase-btn">BUY</button>
+              {bought ?
+                <button className="purchase-btn disable" disabled>OWNED</button>
+                :
+                <button className="purchase-btn">BUY</button>
+              }
             </div>
           </div>
         </div>

@@ -4,7 +4,8 @@ const initialState = {
     productList: [],
     filteredProductList: [],
     sort: "name-increase",
-    singleProduct: null
+    singleProduct: null,
+    cartProduct: []
 }
 
 const productSlice = createSlice({
@@ -51,9 +52,34 @@ const productSlice = createSlice({
                     return gameB.price - gameA.price
                 })
             }
+        },
+        getCartProduct: (state) => {
+            const cart = JSON.parse(localStorage.getItem("cart"))
+            if (cart) {
+                state.cartProduct = [...cart]
+            }
+            else {
+                localStorage.setItem("cart", JSON.stringify(state.cartProduct))
+            }
+        },
+        setCartProduct: (state) => {
+            localStorage.setItem("cart", JSON.stringify(state.cartProduct))
+        },
+        addToCart: (state, action) => {
+            state.cartProduct = [...state.cartProduct, action.payload]
+        },
+        removeFromCart: (state, action) => {
+            const newCart = [...state.cartProduct].filter((product) => {
+                return product.id !== action.payload
+            })
+            state.cartProduct = newCart
+        },
+        clearCart: (state) => {
+            state.cartProduct = []
         }
     }
 })
 
-export const { setProductList, setFilteredProduct, sortProduct, setSingleProduct } = productSlice.actions
+export const { setProductList, setFilteredProduct, sortProduct, setSingleProduct, getCartProduct, setCartProduct, addToCart,
+    removeFromCart, clearCart } = productSlice.actions
 export default productSlice.reducer;

@@ -11,7 +11,12 @@ import Sort from "./Sort/Sort"
 import Filter from "./Filter/Filter"
 import GameDetailBody from "./GameDetailBody/GameDetailBody"
 import GameDetailHeader from "./GameDetailHeader/GameDetailHeader"
+import Cart from "./Cart/Cart"
 
-
-export { Navbar, SignIn, SignUp, Banner, ScrollButton, HomeCategory, Carousel, GameList, GameCard, Sort, Filter, GameDetailBody, GameDetailHeader }
+export {
+    Navbar, SignIn, SignUp, Banner,
+    ScrollButton, HomeCategory, Carousel,
+    GameList, GameCard, Sort, Filter,
+    GameDetailBody, GameDetailHeader, Cart
+}
 

@@ -11,7 +11,7 @@ import "./Navbar.sass"
 import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPage, setSearchKey } from '../../features/navbar/navbarSlice';
-import { setFilteredProduct, sortProduct } from "../../features/product/productSlice"
+import { setFilteredProduct, sortProduct, setCartProduct, removeFromCart, clearCart } from "../../features/product/productSlice"
 
 const list = [{
   name: "VN",
@@ -25,11 +25,11 @@ const list = [{
 const Navbar = () => {
   let navigate = useNavigate();
 
-  const { productList, filteredProductList } = useSelector(store => store.product)
+  const { productList, cartProduct } = useSelector(store => store.product)
 
   const { currentUser } = useSelector(store => store.login)
 
-  const [language, setLanguage] = useState("VN")
+  const [language, setLanguage] = useState("EN")
   const [languageList, setLanguageList] = useState(false)
   const [accountList, setAccountList] = useState(false)
   const [searchValue, setSearchValue] = useState("")
@@ -51,6 +51,18 @@ const Navbar = () => {
     navigate("/game", { replace: true })
   }
 
+  const handleCart = () => {
+    if (currentUser) {
+      let owned = [...currentUser.ownedGame].map((game) => game.id)
+      let newCart = cartProduct.filter((game) => {
+        return owned.indexOf(game.id) !== -1
+      }).map((game) => game.id)
+      newCart.forEach((game) => {
+        dispatch(removeFromCart(game))
+      })
+      dispatch(setCartProduct())
+    }
+  }
   return (
     <>
       {currentPage !== "login" ? <nav className='navbar'>
@@ -100,6 +112,14 @@ const Navbar = () => {
               })}
             </ul> : null}
           </div>
+          <div className="cart-container">
+            <Link to="/payment" onClick={handleCart}>
+              <BsCartFill />
+            </Link>
+            <div className="amount">
+              {cartProduct.length}
+            </div>
+          </div>
           {currentUser !== null ? <div className="account" onClick={() => { setAccountList(!accountList) }}>
             <div className="account-avatar">
               <img src="https://znews-stc.zdn.vn/static/topic/person/justin.jpg" alt="" />
@@ -113,7 +133,7 @@ const Navbar = () => {
                 My account
               </li>
               <li>
-                <Link to="payment">
+                <Link>
                   <BsCartFill />
                   My Cart
                 </Link>

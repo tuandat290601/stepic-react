@@ -1,8 +1,12 @@
 import React from 'react'
+import { Cart } from '../../components'
+import "./Payment.sass"
 
 const Payment = () => {
   return (
-    <div>Payment</div>
+    <section id='payment-page'>
+      <Cart />
+    </section>
   )
 }
 

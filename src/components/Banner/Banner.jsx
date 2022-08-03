@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import "./Banner.sass"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { BsArrowRight } from "react-icons/bs";
 
 const Banner = () => {
-    const {productList} = useSelector(store => store.product)
+    const { productList } = useSelector(store => store.product)
     const [currentBanner, setCurrentBanner] = useState(0)
     const [list, setList] = useState(productList)
     const [mainBanner, setMainBanner] = useState(null)
@@ -15,21 +15,21 @@ const Banner = () => {
         setMainBanner(list[index].gameImage)
     }
     const sortByDate = (array) => {
-        let newArray = array.slice(0,4)
-        return newArray.sort((p1, p2)=>{
+        let newArray = array.slice(0, 4)
+        return newArray.sort((p1, p2) => {
             return new Date(p2.publishDate) - new Date(p1.publishDate)
         })
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         setList(sortByDate(productList))
     }, [productList])
 
-    useEffect(()=>{
-        if(list.length!==0){
+    useEffect(() => {
+        if (list.length !== 0) {
             handleBanner(0)
         }
-    },[list])
+    }, [list])
 
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Banner = () => {
                                 <img src={list[currentBanner].logoImage} alt="" />
                             </div>
                             <p>{list[currentBanner].status}</p>
-                            <p>{list[currentBanner].description}</p>
+                            <p>{list[currentBanner].shortDesc}</p>
                             <div className="price">
                                 {list[currentBanner].discount !== 0 ? <>
                                     <p className='old-price'>${list[currentBanner].price} </p> <BsArrowRight />
@@ -70,7 +70,7 @@ const Banner = () => {
                             </div>
                             <div className="main-banner-btn-container">
                                 <button className='main-banner-btn blue-background'>Add to Cart</button>
-                                <Link to ={`/game/${list[currentBanner].id}`} className='main-banner-btn orange-background'>Buy now</Link>
+                                <Link to={`/game/${list[currentBanner].id}`} className='main-banner-btn orange-background'>Buy now</Link>
                             </div>
                         </div>
                     </div>
