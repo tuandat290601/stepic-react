@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import "./Banner.sass"
-import { Link } from "react-router-dom"
 import { BsArrowRight } from "react-icons/bs";
+import { setCartProduct, addToCart } from '../../features/product/productSlice';
 
 const Banner = () => {
+    const dispatch = useDispatch()
+
     const { productList } = useSelector(store => store.product)
     const [currentBanner, setCurrentBanner] = useState(0)
     const [list, setList] = useState(productList)
@@ -59,18 +61,25 @@ const Banner = () => {
                             <div className="main-banner-logo">
                                 <img src={list[currentBanner].logoImage} alt="" />
                             </div>
-                            <p>{list[currentBanner].status}</p>
                             <p>{list[currentBanner].shortDesc}</p>
                             <div className="price">
                                 {list[currentBanner].discount !== 0 ? <>
                                     <p className='old-price'>${list[currentBanner].price} </p> <BsArrowRight />
                                 </> : null}
 
-                                <h5 className='new-price'>${list[currentBanner].price * (100 - list[currentBanner].discount) / 100}</h5>
+                                {list[currentBanner].price === 0 ?
+                                    <h5 className='new-price'>Free</h5>
+                                    :
+                                    <h5 className='new-price'>${list[currentBanner].price * (100 - list[currentBanner].discount) / 100}</h5>}
                             </div>
                             <div className="main-banner-btn-container">
-                                <button className='main-banner-btn blue-background'>Add to Cart</button>
-                                <Link to={`/game/${list[currentBanner].id}`} className='main-banner-btn orange-background'>Buy now</Link>
+                                <button className='main-banner-btn blue-background' onClick={() => {
+                                    dispatch(addToCart(list[currentBanner]))
+                                    dispatch(setCartProduct())
+                                }
+                                }>
+                                    Add to Cart
+                                </button>
                             </div>
                         </div>
                     </div>

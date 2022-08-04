@@ -67,7 +67,7 @@ const GameDetailHeader = () => {
             </div>
             <div className="right">
               {bought ?
-                <button className="purchase-btn disable" disabled>OWNED</button>
+                <button className="purchase-btn disable" disabled>DOWNLOAD</button>
                 :
                 <button className="purchase-btn">BUY</button>
               }

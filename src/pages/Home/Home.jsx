@@ -13,11 +13,13 @@ import "./Home.sass"
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { productList, cartProduct } = useSelector(store => store.product)
+  const { productList } = useSelector(store => store.product)
   const getProducts = async () => {
-    let res = await API.get("/product")
-    dispatch(setProductList(res.data))
-    dispatch(setFilteredProduct(res.data))
+    if (productList.length === 0) {
+      let res = await API.get("/product")
+      dispatch(setProductList(res.data))
+      dispatch(setFilteredProduct(res.data))
+    }
   }
   useEffect(() => {
     dispatch(getCartProduct())

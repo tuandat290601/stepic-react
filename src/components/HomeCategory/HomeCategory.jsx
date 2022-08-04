@@ -10,7 +10,7 @@ import {
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 import { formatDate } from "../../ultils/formatDate";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight, BsCart, BsCartCheck, BsDownload } from "react-icons/bs";
 import "./HomeCategory.sass";
 
 const HomeCategory = () => {
@@ -20,10 +20,8 @@ const HomeCategory = () => {
   const [highrateList, setHighrateList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
 
-  const { productList, filteredProductList, cartProduct } = useSelector(
-    (store) => store.product
-  );
-
+  const { productList, filteredProductList, cartProduct } = useSelector((store) => store.product);
+  const { currentUser } = useSelector(store => store.login)
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState("Top Discount");
@@ -83,6 +81,19 @@ const HomeCategory = () => {
     }
   };
 
+  const checkBoughtProduct = (id) => {
+    let bought = false
+    if (currentUser !== null) {
+      currentUser.ownedGame.forEach(game => {
+        if (game.id === id) {
+          bought = true
+          return bought
+        }
+      })
+    }
+    return bought
+  }
+
   useEffect(() => {
     handleCategoryList();
   }, [category, productList]);
@@ -139,15 +150,22 @@ const HomeCategory = () => {
                         </div>
                       </div>
                       <div className="info-container-right">
-                        {added.length !== 0 ?
-                          <button className="add-to-cart-btn disabled" >Added</button>
-                          :
-                          <button className="add-to-cart-btn" onClick={() => {
-                            dispatch(addToCart(item))
-                            dispatch(setCartProduct())
+                        {checkBoughtProduct(id) === true ? <button className="add-to-cart-btn disabled" >
+                          <BsDownload />
+                        </button> : <>
+                          {added.length !== 0 ?
+                            <button className="add-to-cart-btn disabled" >
+                              <BsCartCheck />
+                            </button>
+                            :
+                            <button className="add-to-cart-btn" onClick={() => {
+                              dispatch(addToCart(item))
+                              dispatch(setCartProduct())
+                            }
+                            }><BsCart /></button>
                           }
-                          }>Add to cart</button>
-                        }
+                        </>}
+
                       </div>
                     </div>
                   </div>

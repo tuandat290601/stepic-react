@@ -17,6 +17,6 @@ export {
     Navbar, SignIn, SignUp, Banner,
     ScrollButton, HomeCategory, Carousel,
     GameList, GameCard, Sort, Filter,
-    GameDetailBody, GameDetailHeader, Cart
+    GameDetailBody, GameDetailHeader, Cart,
 }
 

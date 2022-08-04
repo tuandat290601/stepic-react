@@ -1,14 +1,30 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Sort, Filter, GameList } from "../../components";
+import { setProductList, setFilteredProduct, getCartProduct } from "../../features/product/productSlice";
+import API from "../../common/API/API";
+
 
 import "./Game.sass";
 
 const Game = () => {
-  const { filteredProductList } = useSelector((store) => store.product);
+  const dispatch = useDispatch()
+  const { productList, filteredProductList } = useSelector((store) => store.product);
   const { searchKey } = useSelector((store) => store.navbar);
   const [loading, setLoading] = useState(false);
+
+  const getProducts = async () => {
+    if (productList.length === 0) {
+      let res = await API.get("/product")
+      dispatch(setProductList(res.data))
+      dispatch(setFilteredProduct(res.data))
+    }
+  }
+  useEffect(() => {
+    dispatch(getCartProduct())
+    getProducts()
+  }, [])
 
   useEffect(() => {
     if (filteredProductList.length !== 0) {
