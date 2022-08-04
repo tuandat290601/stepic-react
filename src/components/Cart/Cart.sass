@@ -50,6 +50,15 @@
                 display: flex
                 flex-direction: row
                 position: relative
+                min-height: 55px
+                .price-only
+                    height: 100%
+                    display: flex
+                    align-items: flex-end
+                    font-size: 18px
+                    font-weight: bold
+                    letter-spacing: 1px
+                    margin-left: 10px
                 .left
                     width: fit-content
                     height: 100%
@@ -156,3 +165,20 @@
             letter-spacing: 1px
         button:hover
             background: var(--orange-color)
+.check-mark
+    width: 200px
+    height: 200px
+    border-radius: 50%
+    border: 2px solid var(--orange-color)
+    margin: auto
+    display: flex
+    justify-content: center
+    align-items: center
+    svg
+        font-size: 150px
+        color: var(--orange-color)
+.notification
+    width: 100%
+    text-align: center
+    margin-top: 20px
+    color: var(--orange-color)

@@ -8,6 +8,7 @@ import "./Cart.sass"
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { setCurrentUser } from '../../features/login/loginSlice';
+import { MdOutlineDone } from "react-icons/md";
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -48,7 +49,10 @@ const Cart = () => {
         <>
             {success ?
                 <div className='cart'>
-                    success
+                    <div className="check-mark">
+                        <MdOutlineDone />
+                    </div>
+                    <h2 className='notification'>All done! It's time to play</h2>
                 </div>
                 : <div className='cart'>
                     {cartProduct.length === 0 ?
@@ -76,27 +80,39 @@ const Cart = () => {
                                                     <h2>{name}</h2>
                                                     <h5>{brand}</h5>
                                                 </div>
-                                                <div className="cart-item-price-container">
-                                                    <div className="left">
-                                                        <div className="cart-item-discount">
-                                                            -{discount}%
-                                                        </div>
-                                                    </div>
-                                                    <div className="right">
-                                                        <div className="cart-item-old-price">
+                                                {discount === 0 ?
+                                                    <div className="cart-item-price-container">
+                                                        <div className="price-only">
                                                             ${price}
                                                         </div>
-                                                        <div className="cart-item-new-price">
-                                                            ${price - price * (discount / 100)}
+                                                        <div className="remove-btn">
+                                                            <button onClick={() => {
+                                                                dispatch(removeFromCart(id))
+                                                                dispatch(setCartProduct())
+                                                            }}>Remove</button>
                                                         </div>
                                                     </div>
-                                                    <div className="remove-btn">
-                                                        <button onClick={() => {
-                                                            dispatch(removeFromCart(id))
-                                                            dispatch(setCartProduct())
-                                                        }}>Remove</button>
-                                                    </div>
-                                                </div>
+                                                    : <div className="cart-item-price-container">
+                                                        <div className="left">
+                                                            <div className="cart-item-discount">
+                                                                -{discount}%
+                                                            </div>
+                                                        </div>
+                                                        <div className="right">
+                                                            <div className="cart-item-old-price">
+                                                                ${price}
+                                                            </div>
+                                                            <div className="cart-item-new-price">
+                                                                ${price - price * (discount / 100)}
+                                                            </div>
+                                                        </div>
+                                                        <div className="remove-btn">
+                                                            <button onClick={() => {
+                                                                dispatch(removeFromCart(id))
+                                                                dispatch(setCartProduct())
+                                                            }}>Remove</button>
+                                                        </div>
+                                                    </div>}
                                             </div>
                                         </li>
                                     })}
