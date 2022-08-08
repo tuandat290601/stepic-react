@@ -5,7 +5,10 @@ const initialState = {
     filteredProductList: [],
     sort: "name-increase",
     singleProduct: null,
-    cartProduct: []
+    cartProduct: [],
+    filter: {
+        price: null
+    }
 }
 
 const productSlice = createSlice({
@@ -76,10 +79,13 @@ const productSlice = createSlice({
         },
         clearCart: (state) => {
             state.cartProduct = []
+        },
+        setFilter: (state, action) => {
+            state.filter = { ...action.payload }
         }
     }
 })
 
 export const { setProductList, setFilteredProduct, sortProduct, setSingleProduct, getCartProduct, setCartProduct, addToCart,
-    removeFromCart, clearCart } = productSlice.actions
+    removeFromCart, clearCart, setFilter } = productSlice.actions
 export default productSlice.reducer;

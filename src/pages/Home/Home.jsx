@@ -26,13 +26,13 @@ const Home = () => {
     getProducts()
   }, [])
 
-  return (<>
-    {productList.length === 0 ? null : <main className='home'>
+  return (<main className='home'>
+    {productList.length !== 0 && <>
       <Banner />
       <Carousel />
       <HomeCategory />
-    </main>}
-  </>
+    </>}
+  </main>
   )
 }
 
