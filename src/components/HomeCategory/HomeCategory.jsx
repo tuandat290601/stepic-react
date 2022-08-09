@@ -20,7 +20,7 @@ const HomeCategory = () => {
   const [highrateList, setHighrateList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
 
-  const { productList, filteredProductList, cartProduct } = useSelector((store) => store.product);
+  const { productList, cartProduct } = useSelector((store) => store.product);
   const { currentUser } = useSelector(store => store.login)
   const dispatch = useDispatch();
 
@@ -61,11 +61,12 @@ const HomeCategory = () => {
     setDiscountList(getDiscountList());
     setNewreleaseList(getNewRelease());
     setHighrateList(getHighRating());
-
+    setDisplayList(discountList)
   }, [productList]);
 
   useEffect(() => {
     setDiscountList(getDiscountList());
+    setDisplayList(discountList)
   }, []);
 
   const handleCategoryList = () => {
