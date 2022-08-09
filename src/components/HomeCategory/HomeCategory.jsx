@@ -119,15 +119,15 @@ const HomeCategory = () => {
           })}
         </ul>
       </div>
-      <div className="home-category-list-container">
-        <ul className="home-category-list">
+      <div className="home-category-list-container container">
+        <ul className="home-category-list row">
           {displayList.map((item, index) => {
             const { id, gameImage, name, price, discount } = item;
             const added = cartProduct.filter(game => game.id === item.id)
             return (
               <div
                 key={index}
-                className="home-category-item"
+                className="home-category-item col-12 col-s-6 col-md-4 col-lg-3"
               >
                 <div className="img-container">
                   <img src={gameImage} alt={name} className="game-image" />
@@ -176,7 +176,7 @@ const HomeCategory = () => {
             );
           })}
           {displayList.length !== 0 && (
-            <Link to="/game" className="home-category-item">
+            <Link to="/game" className="home-category-item col-12 col-s-6 col-md-4 col-lg-3">
               <div className="img-container">
                 <img src={discountList[8].gameImage} className="game-image" />
                 <div className="blur-container">

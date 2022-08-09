@@ -6,13 +6,15 @@ import "./GameList.sass"
 
 
 const GameList = () => {
-  const {filteredProductList} = useSelector(store => store.product)
+  const { filteredProductList } = useSelector(store => store.product)
   return (
-    <ul className='game-list'>
-      {filteredProductList.map((game)=>{
-        return <GameCard key = {game.id} {...game}/>
-      })}
-    </ul>
+    <div className="game-list container">
+      <ul className='row'>
+        {filteredProductList.map((game) => {
+          return <GameCard key={game.id} {...game} />
+        })}
+      </ul>
+    </div>
   )
 }
 

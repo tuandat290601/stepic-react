@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import "./Banner.sass"
 import { BsArrowRight } from "react-icons/bs";
 import { setCartProduct, addToCart } from '../../features/product/productSlice';
+import { formatPrice } from '../../ultils/formatPriceToUSD';
 
 const Banner = () => {
     const dispatch = useDispatch()
@@ -64,13 +65,13 @@ const Banner = () => {
                             <p>{list[currentBanner].shortDesc}</p>
                             <div className="price">
                                 {list[currentBanner].discount !== 0 ? <>
-                                    <p className='old-price'>${list[currentBanner].price} </p> <BsArrowRight />
+                                    <p className='old-price'>${formatPrice(list[currentBanner].price)} </p> <BsArrowRight />
                                 </> : null}
 
                                 {list[currentBanner].price === 0 ?
                                     <h5 className='new-price'>Free</h5>
                                     :
-                                    <h5 className='new-price'>${list[currentBanner].price * (100 - list[currentBanner].discount) / 100}</h5>}
+                                    <h5 className='new-price'>${formatPrice(list[currentBanner].price * (100 - list[currentBanner].discount) / 100)}</h5>}
                             </div>
                             <div className="main-banner-btn-container">
                                 <button className='main-banner-btn blue-background' onClick={() => {

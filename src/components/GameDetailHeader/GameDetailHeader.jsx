@@ -50,7 +50,7 @@ const GameDetailHeader = () => {
               ) : (
                 <div className="game-detail-price">
                   {discount === 0 ? (
-                    <div className="price">{price}</div>
+                    <div className="price">${price}</div>
                   ) : (
                     <>
                       <div className="discount-container">

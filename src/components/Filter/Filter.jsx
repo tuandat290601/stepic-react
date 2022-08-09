@@ -8,10 +8,14 @@ const Filter = () => {
   const { productList, filter } = useSelector(store => store.product)
   const dispatch = useDispatch()
 
+  let range = Math.max(...productList?.map(game => game.price))
   const brandList = [...new Set(productList.map(game => game.brand))]
-  const range = Math.max(...productList.map(game => game.price))
-  console.log(range)
+
   const [maxPrice, setMaxPrice] = useState(range / 2)
+  useEffect(() => {
+    range = Math.max(...productList?.map(game => game.price))
+    setMaxPrice(range / 2)
+  }, [productList])
   useEffect(() => {
     let newList = productList.filter(game => game.price <= maxPrice)
     dispatch(setFilteredProduct(newList))

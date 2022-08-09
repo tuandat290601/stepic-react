@@ -10,6 +10,7 @@ import {
 import { BsArrowRight, BsCart, BsCartCheck, BsDownload } from "react-icons/bs";
 import "../HomeCategory/HomeCategory.sass"
 import "./GameCard.sass"
+import { formatPrice } from "../../ultils/formatPriceToUSD";
 
 const GameCard = (game) => {
   const { id, name, discount, gameImage, price } = game
@@ -34,7 +35,7 @@ const GameCard = (game) => {
     return bought
   }
   return (
-    <li className='game-card'>
+    <li className='game-card col-sm-6 col-md-4 col-lg-3'>
       <div className="game-card-img">
         <img src={gameImage} alt={name} />
       </div>
@@ -44,12 +45,12 @@ const GameCard = (game) => {
           <div className="info-price-container">
             {discount !== 0 && (
               <p className="info-discount">
-                ${discount}
+                ${formatPrice(price)}
                 <BsArrowRight />
               </p>
             )}
             {price !== 0 ? <p className="info-price">
-              ${price - price * (discount / 100)}
+              ${formatPrice(price - price * (discount / 100))}
             </p> : <p className="info-price">
               Free
             </p>}

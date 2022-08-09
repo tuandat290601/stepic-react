@@ -7,7 +7,6 @@ import "./GameDetailBody.sass";
 const GameDetailBody = () => {
   const { singleProduct } = useSelector((store) => store.product);
   const { description } = singleProduct;
-  console.log(singleProduct)
   return <div className="detail-body">
 
     {parse(description)}

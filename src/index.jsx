@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { Navbar, ScrollButton } from "./components";
 
 import { useSelector } from "react-redux/es/exports";
+import Footer from "./components/Footer/Footer";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,6 +28,7 @@ root.render(
         </Routes>
         {/* <Footer/> */}
         <ScrollButton />
+        <Footer />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
