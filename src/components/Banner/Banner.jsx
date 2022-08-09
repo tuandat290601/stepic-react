@@ -5,7 +5,12 @@ import { BsArrowRight } from "react-icons/bs";
 import { setCartProduct, addToCart } from '../../features/product/productSlice';
 import { formatPrice } from '../../ultils/formatPriceToUSD';
 
+import useViewport from "../../customhooks/useViewport"
+
 const Banner = () => {
+    const viewport = useViewport()
+    const isTablet = viewport.width < 992
+
     const dispatch = useDispatch()
 
     const { productList } = useSelector(store => store.product)
@@ -54,7 +59,6 @@ const Banner = () => {
         <>
             <section className='banner-container' >
                 <div className="banner-content" >
-
                     <div className="main-banner-container">
                         <img className='main-banner-img' src={mainBanner} alt="" />
                         <div className="main-banner-blur"></div>
@@ -62,7 +66,7 @@ const Banner = () => {
                             <div className="main-banner-logo">
                                 <img src={list[currentBanner].logoImage} alt="" />
                             </div>
-                            <p>{list[currentBanner].shortDesc}</p>
+                            <p className={isTablet ? 'banner-desc-mobile' : ''}>{isTablet ? list[currentBanner].shortDesc.slice(0, 150) + "..." : list[currentBanner].shortDesc}</p>
                             <div className="price">
                                 {list[currentBanner].discount !== 0 ? <>
                                     <p className='old-price'>${formatPrice(list[currentBanner].price)} </p> <BsArrowRight />

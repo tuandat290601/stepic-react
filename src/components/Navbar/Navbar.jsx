@@ -12,6 +12,7 @@ import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPage, setSearchKey } from '../../features/navbar/navbarSlice';
 import { setFilteredProduct, sortProduct, setCartProduct, removeFromCart, clearCart } from "../../features/product/productSlice"
+import useViewport from "../../customhooks/useViewport"
 
 const list = [{
   name: "VN",
@@ -26,8 +27,10 @@ const Navbar = () => {
   let navigate = useNavigate();
 
   const { productList, cartProduct } = useSelector(store => store.product)
-
   const { currentUser } = useSelector(store => store.login)
+  const dispatch = useDispatch();
+
+  const screenWidth = useViewport().width
 
   const [language, setLanguage] = useState("EN")
   const [languageList, setLanguageList] = useState(false)
@@ -35,7 +38,6 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("")
 
   const { currentPage } = useSelector(store => store.navbar)
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +67,7 @@ const Navbar = () => {
   }
   return (
     <>
-      {currentPage !== "login" ? <nav className='navbar'>
+      {currentPage !== "login" ? <nav className={screenWidth >= 1280 ? 'navbar navbar-padding' : 'navbar'}>
         <div className="logo">
           <Link to="/" onClick={() => dispatch(setCurrentPage("home"))}>
             <img src="/img/logo.png" alt="" />

@@ -11,12 +11,12 @@
     left: 0
 
     .logo
-        width: calc( 100% /12 * 2 )
+        width: 100px
         margin: 0
         text-align: center
 
         img
-            width: 60%
+            width: 100%
 
     .nav-list
         width: calc( 100% / 12 * 4 )
@@ -157,8 +157,8 @@
             justify-content: center
             align-items: center
             margin-left: 40px
-            margin-right: 40px
             cursor: pointer
+            text-align: center
 
             .account-avatar
                 width: 40px
@@ -220,6 +220,8 @@
     font-size: 12px !important
     margin-bottom: 4px
 
+.rotate-90
+    transform: rotateZ(90deg)
 .link-to-login
     background-color: var(--blue-color)
     padding: 10px 20px
@@ -232,3 +234,5 @@
 .active
     border-bottom: 2px solid var(--orange-color) !important
     color: var(--orange-color) !important
+.navbar-padding
+    padding: 0 100px

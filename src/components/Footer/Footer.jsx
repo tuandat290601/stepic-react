@@ -10,11 +10,14 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 import "./Footer.sass"
 import "../../App.sass"
+import useViewport from '../../customhooks/useViewport';
 
 const Footer = () => {
+    const viewport = useViewport()
+    const isMobile = viewport.width < 768
     return (
         <div className="footer_field">
-            <footer>
+            <footer className={isMobile ? "mobile-footer" : ""}>
                 <div className="rights">
                     <Link to="/">
                         <img src="/img/logo.png" alt="" />
