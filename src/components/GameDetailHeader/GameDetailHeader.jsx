@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsArrowRight } from "react-icons/bs";
+import {
+  addToCart,
+  setCartProduct
+} from "../../features/product/productSlice"
 
 import "./GameDetailHeader.sass";
 
 const GameDetailHeader = () => {
-  const { singleProduct } = useSelector((store) => store.product);
+  const dispatch = useDispatch()
+  const { singleProduct, cartProduct } = useSelector((store) => store.product);
   const { id, name, price, discount, gameImage, shortDesc, genres } = singleProduct;
 
   const [bought, setBought] = useState(false)
@@ -14,12 +19,15 @@ const GameDetailHeader = () => {
 
   useEffect(() => { //check whether this account already has this game 
     if (currentUser) {
-      console.log(currentUser.ownedGame)
       if (currentUser.ownedGame.map(game => game.id).includes(singleProduct.id)) {
         setBought(true)
       }
     }
   }, [currentUser])
+
+  const checkAddedGame = (game) => {
+    return cartProduct.filter(item => item.id === game.id).length > 0
+  }
 
   return (
     <div className="game-detail-header">
@@ -70,7 +78,12 @@ const GameDetailHeader = () => {
               {bought ?
                 <button className="purchase-btn disable" disabled>DOWNLOAD</button>
                 :
-                <button className="purchase-btn">BUY</button>
+                <button className="purchase-btn" onClick={() => {
+                  if (!checkAddedGame(singleProduct)) {
+                    dispatch(addToCart(singleProduct))
+                    dispatch(setCartProduct())
+                  }
+                }}>ADD TO CART</button>
               }
             </div>
           </div>

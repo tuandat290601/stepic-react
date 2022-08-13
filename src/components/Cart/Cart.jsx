@@ -17,6 +17,7 @@ const Cart = () => {
     const { currentUser } = useSelector(store => store.login)
 
     const [success, setSuccess] = useState(false)
+    const [method, setMethod] = useState("MOMO")
 
     let navigate = useNavigate()
 
@@ -138,7 +139,7 @@ const Cart = () => {
                                             Payment method
                                         </div>
                                         <div className="right">
-                                            <select name="payment" id="payment-method">
+                                            <select name="payment" id="payment-method" onChange={(e) => { setMethod(e.target.value) }}>
                                                 <option value="momo">MOMO</option>
                                                 <option value="credit">CREDIT CARD</option>
                                             </select>
@@ -146,7 +147,7 @@ const Cart = () => {
                                     </div>
                                     <div className="payment-info">
                                         <div className="left">
-                                            Phone Number
+                                            {method === "MOMO" ? "Phone Number" : "Credit Number"}
                                         </div>
                                         <div className="right">
                                             <input type="text" />
