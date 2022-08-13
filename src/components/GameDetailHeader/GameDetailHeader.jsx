@@ -6,7 +6,7 @@ import "./GameDetailHeader.sass";
 
 const GameDetailHeader = () => {
   const { singleProduct } = useSelector((store) => store.product);
-  const { name, price, discount, gameImage, shortDesc } = singleProduct;
+  const { id, name, price, discount, gameImage, shortDesc, genres } = singleProduct;
 
   const [bought, setBought] = useState(false)
 
@@ -35,9 +35,10 @@ const GameDetailHeader = () => {
           </div>
           <div className="game-detail-genre">
             <ul className="genre-list">
-              <li className="genre">Action</li>
-              <li className="genre">Hack and Slat</li>
-              <li className="genre">Tatic</li>
+              {genres.map((genre, index) => {
+                return <li key={index} className="genre">{genre}</li>
+              })}
+
             </ul>
           </div>
           <div className="game-detail-description">

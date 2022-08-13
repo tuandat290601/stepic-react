@@ -11,8 +11,9 @@ import "./Navbar.sass"
 import "../../App.sass"
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentPage, setSearchKey } from '../../features/navbar/navbarSlice';
-import { setFilteredProduct, sortProduct, setCartProduct, removeFromCart, clearCart } from "../../features/product/productSlice"
+import { setFilteredProduct, sortProduct, setCartProduct, removeFromCart, clearCart, setSingleProduct } from "../../features/product/productSlice"
 import useViewport from "../../customhooks/useViewport"
+import { formatPrice } from "../../ultils/formatPriceToUSD";
 
 const list = [{
   name: "VN",
@@ -36,6 +37,7 @@ const Navbar = () => {
   const [languageList, setLanguageList] = useState(false)
   const [accountList, setAccountList] = useState(false)
   const [searchValue, setSearchValue] = useState("")
+  const [isResultOpen, setIsResultOpen] = useState(false)
 
   const { currentPage } = useSelector(store => store.navbar)
 
@@ -45,7 +47,6 @@ const Navbar = () => {
     let result = newList.filter((product) => {
       return product.name.toLowerCase().includes(searchValue.toLowerCase()) == true || product.brand.toLowerCase().includes(searchValue.toLowerCase()) == true
     })
-    console.log(result)
     setSearchValue("")
     dispatch(setFilteredProduct(result))
     dispatch(sortProduct("name-increase"))
@@ -65,6 +66,7 @@ const Navbar = () => {
       dispatch(setCartProduct())
     }
   }
+
   return (
     <>
       {currentPage !== "login" ? <nav className={screenWidth >= 1280 ? 'navbar navbar-padding' : 'navbar'}>
@@ -91,6 +93,40 @@ const Navbar = () => {
           <button type='submit' className="search-btn">
             <BsSearch />
           </button>
+          {searchValue !== "" && <div className="search-result-list-container">
+            <ul className="search-result-list">
+              {productList.filter((game) => {
+                return game.name.toLowerCase().includes(searchValue.toLowerCase()) == true || game.brand.toLowerCase().includes(searchValue.toLowerCase()) == true
+              }).map((game) => {
+                let newPrice = formatPrice(game.price - game.price * (game.discount / 100))
+                return <li key={game.id} className='search-result-container'>
+                  <Link to={`/game/${game.id}`} className='search-result-link' onClick={() => {
+                    dispatch(setSingleProduct(game))
+                    setSearchValue("")
+                  }}>
+                    <div className="search-result-img">
+                      <img src={game.gameImage} alt="" />
+                    </div>
+                    <div className="search-result-info-container">
+                      <p className="search-result-name">{game.name}</p>
+                      <div className="search-result-price-container">
+                        <div className="search-result-price-top">
+                          {game.discount !== 0 && <>
+                            <div className="search-result-old-price">${formatPrice(game.price)}</div>
+                            <div className="search-result-discount">-{game.discount}%</div>
+                          </>}
+                        </div>
+                        <div className="search-result-price">
+                          {newPrice == 0 ? `Free` : `$${newPrice}`}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+
+                </li>
+              })}
+            </ul>
+          </div>}
         </form>
         <div className="account-container" >
           <div className="language-container" onClick={() => { setLanguageList(!languageList) }}>
