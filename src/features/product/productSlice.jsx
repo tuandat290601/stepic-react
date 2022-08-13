@@ -55,6 +55,16 @@ const productSlice = createSlice({
                     return gameB.price - gameA.price
                 })
             }
+            if (sort === "Top Discount") {
+                state.filteredProductList = state.filteredProductList.sort((gameA, gameB) => {
+                    return gameB.discount - gameA.discount
+                })
+            }
+            if (sort === "Highest Rating") {
+                state.filteredProductList = state.filteredProductList.sort((gameA, gameB) => {
+                    return gameB.rating - gameA.rating
+                })
+            }
         },
         getCartProduct: (state) => {
             const cart = JSON.parse(localStorage.getItem("cart"))

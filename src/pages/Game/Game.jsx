@@ -18,12 +18,13 @@ const Game = () => {
     if (productList.length === 0) {
       let res = await API.get("/product")
       dispatch(setProductList(res.data))
-      dispatch(setFilteredProduct(res.data))
     }
   }
   useEffect(() => {
-    dispatch(getCartProduct())
-    getProducts()
+    if (productList.length === 0) {
+      dispatch(getCartProduct())
+      getProducts()
+    }
   }, [])
 
   useEffect(() => {

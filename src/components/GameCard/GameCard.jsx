@@ -75,6 +75,9 @@ const GameCard = (game) => {
 
         </div>
       </div>
+      {discount !== 0 && <div className="discount-tag game-card-discount">
+        -{discount}%
+      </div>}
     </li>
   )
 }

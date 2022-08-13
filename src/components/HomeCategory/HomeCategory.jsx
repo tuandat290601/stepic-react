@@ -6,10 +6,11 @@ import {
   setSingleProduct,
   setCartProduct,
   addToCart,
+  sortProduct,
 } from "../../features/product/productSlice";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-
 import { formatDate } from "../../ultils/formatDate";
+import { formatPrice } from "../../ultils/formatPriceToUSD"
 import { BsArrowRight, BsCart, BsCartCheck, BsDownload } from "react-icons/bs";
 import "./HomeCategory.sass";
 
@@ -98,7 +99,7 @@ const HomeCategory = () => {
   useEffect(() => {
     handleCategoryList();
   }, [category, productList]);
-
+  console.log(category)
   return (
     <section id="home-category">
       <div className="home-category-navbar">
@@ -112,7 +113,9 @@ const HomeCategory = () => {
                     ? "home-category-navitem active"
                     : "home-category-navitem"
                 }
-                onClick={() => setCategory(navitem)}
+                onClick={() => {
+                  setCategory(navitem)
+                }}
               >
                 {navitem}
               </li>
@@ -139,12 +142,12 @@ const HomeCategory = () => {
                         <div className="info-price-container">
                           {discount !== 0 && (
                             <p className="info-discount">
-                              ${discount}
+                              ${formatPrice(price)}
                               <BsArrowRight />
                             </p>
                           )}
                           {price !== 0 ? <p className="info-price">
-                            ${price - price * (discount / 100)}
+                            ${formatPrice(price - price * (discount / 100))}
                           </p> : <p className="info-price">
                             Free
                           </p>}
@@ -177,7 +180,7 @@ const HomeCategory = () => {
             );
           })}
           {displayList.length !== 0 && (
-            <Link to="/game" className="home-category-item col-12 col-s-6 col-md-4 col-lg-3">
+            <Link to="/game" className="home-category-item col-12 col-s-6 col-md-4 col-lg-3" onClick={() => dispatch(sortProduct(category))}>
               <div className="img-container">
                 <img src={discountList[8].gameImage} className="game-image" />
                 <div className="blur-container">

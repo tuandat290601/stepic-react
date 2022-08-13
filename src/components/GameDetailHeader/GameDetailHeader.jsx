@@ -78,12 +78,14 @@ const GameDetailHeader = () => {
               {bought ?
                 <button className="purchase-btn disable" disabled>DOWNLOAD</button>
                 :
-                <button className="purchase-btn" onClick={() => {
-                  if (!checkAddedGame(singleProduct)) {
-                    dispatch(addToCart(singleProduct))
-                    dispatch(setCartProduct())
-                  }
-                }}>ADD TO CART</button>
+                <>
+                  {checkAddedGame(singleProduct) ? <button className="purchase-btn" disabled>ADDED</button> : <button className="purchase-btn" onClick={() => {
+                    if (!checkAddedGame(singleProduct)) {
+                      dispatch(addToCart(singleProduct))
+                      dispatch(setCartProduct())
+                    }
+                  }}>ADD TO CART</button>}
+                </>
               }
             </div>
           </div>

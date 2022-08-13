@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilteredProduct } from "../../features/product/productSlice"
+import { formatPrice } from "../../ultils/formatPriceToUSD"
 import "./Filter.sass"
 
 const Filter = () => {
   const { productList, filteredProductList } = useSelector(store => store.product)
   const dispatch = useDispatch()
 
-  let range = Math.max(...productList?.map(game => game.price))
+  let range = Math.max(...productList?.map(game => formatPrice(game.price)))
   const [maxPrice, setMaxPrice] = useState(range)
 
   const genreList = [...new Set([].concat(...productList.map(game => game.genres)))]
@@ -36,11 +37,11 @@ const Filter = () => {
   }
 
   useEffect(() => {
-    range = Math.max(...productList?.map(game => game.price))
+    range = formatPrice(Math.max(...productList?.map(game => game.price)))
     setMaxPrice(range)
   }, [productList])
   useEffect(() => {
-    let newList = productList.filter(game => game.price <= maxPrice)
+    let newList = productList.filter(game => formatPrice(game.price) <= maxPrice)
     dispatch(setFilteredProduct(newList))
     if (checkedGenre.length === 0) {
       dispatch(setFilteredProduct(newList))
