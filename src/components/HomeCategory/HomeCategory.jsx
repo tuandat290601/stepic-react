@@ -57,19 +57,6 @@ const HomeCategory = () => {
       });
   };
 
-
-  useEffect(() => {
-    setDiscountList(getDiscountList());
-    setNewreleaseList(getNewRelease());
-    setHighrateList(getHighRating());
-    setDisplayList(discountList)
-  }, [productList]);
-
-  useEffect(() => {
-    setDiscountList(getDiscountList());
-    setDisplayList(discountList)
-  }, []);
-
   const handleCategoryList = () => {
     if (category === "Top Discount") {
       setDisplayList(discountList.slice(0, 7));
@@ -82,6 +69,23 @@ const HomeCategory = () => {
       dispatch(setFilteredProduct(highrateList));
     }
   };
+
+  useEffect(() => {
+    if (productList.length !== 0) {
+      setDiscountList(getDiscountList());
+      setNewreleaseList(getNewRelease());
+      setHighrateList(getHighRating());
+      setDisplayList(discountList)
+    }
+  }, [])
+
+  useEffect(() => {
+    setDiscountList(getDiscountList());
+    setNewreleaseList(getNewRelease());
+    setHighrateList(getHighRating());
+    setDisplayList(discountList)
+    dispatch(setFilteredProduct(discountList));
+  }, [productList]);
 
   const checkBoughtProduct = (id) => {
     let bought = false
