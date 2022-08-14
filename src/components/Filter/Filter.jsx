@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFilteredProduct } from "../../features/product/productSlice"
+import { setFilteredProduct, sortProduct } from "../../features/product/productSlice"
 import { formatPrice } from "../../ultils/formatPriceToUSD"
 import "./Filter.sass"
 
 const Filter = () => {
-  const { productList, filteredProductList } = useSelector(store => store.product)
+  const { productList, filteredProductList, sort } = useSelector(store => store.product)
   const dispatch = useDispatch()
 
   let range = Math.max(...productList?.map(game => formatPrice(game.price)))
@@ -53,7 +53,7 @@ const Filter = () => {
       console.log(newList)
       dispatch(setFilteredProduct(newList))
     }
-
+    dispatch(sortProduct(sort))
   }, [maxPrice, checkedGenre])
 
 
