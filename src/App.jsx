@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Home, Login, Game, GameDetail, Payment, Error } from "./pages";
+import { Home, Login, Game, GameDetail, Payment, Error, Event } from "./pages";
 
 import { store } from './store';
 import { Provider } from "react-redux";
@@ -25,6 +25,7 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/game/:id" element={<GameDetail />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/event" element={<Event />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <ScrollButton />

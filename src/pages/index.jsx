@@ -4,5 +4,6 @@ import Game from "./Game/Game"
 import GameDetail from "./GameDetail/GameDetail"
 import Payment from "./Payment/Payment"
 import Error from "./Error/Error"
+import Event from "./Event/Event"
 
-export {Home, Login,Game,GameDetail,Payment, Error}
+export { Home, Login, Game, GameDetail, Payment, Error, Event }
