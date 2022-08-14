@@ -8,7 +8,11 @@ const initialState = {
     cartProduct: [],
     filter: {
         price: null
-    }
+    },
+    // homeCategory: {
+    //     navitem: "",
+    //     displayList: []
+    // }
 }
 
 const productSlice = createSlice({

@@ -37,8 +37,6 @@ const Navbar = () => {
   const [languageList, setLanguageList] = useState(false)
   const [accountList, setAccountList] = useState(false)
   const [searchValue, setSearchValue] = useState("")
-  const [isResultOpen, setIsResultOpen] = useState(false)
-
   const { currentPage } = useSelector(store => store.navbar)
 
   const handleSubmit = (e) => {

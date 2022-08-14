@@ -28,33 +28,35 @@ const HomeCategory = () => {
   const [category, setCategory] = useState("Top Discount");
 
   const getDiscountList = () => {
-    let newList = [...productList];
-    return newList.sort((productA, productB) => {
+    let newList = [...productList].sort((productA, productB) => {
       return productB.discount - productA.discount;
     });
+    setDiscountList(newList)
+    return newList
   };
 
   const getHighRating = () => {
-    let newList = [...productList];
-    return newList.sort((productA, productB) => {
+    let newList = [...productList].sort((productA, productB) => {
       return productB.rating - productA.rating;
     });
+    setHighrateList(newList)
+    return newList
   };
 
   const getNewRelease = () => {
     let currentDate = formatDate(
       new Date().toISOString().slice(0, 10)
     ).replaceAll("/", "");
-    let newList = [...productList];
-    return newList
-      .filter((product) => {
-        const { publishDate } = product;
-        let date = formatDate(publishDate).replaceAll("/", "");
-        return date <= currentDate;
-      })
+    let newList = [...productList].filter((product) => {
+      const { publishDate } = product;
+      let date = formatDate(publishDate).replaceAll("/", "");
+      return date <= currentDate;
+    })
       .sort((productA, productB) => {
         return new Date(productB.publishDate) - new Date(productA.publishDate);
       });
+    setNewreleaseList(newList)
+    return newList
   };
 
   const handleCategoryList = () => {
@@ -71,21 +73,16 @@ const HomeCategory = () => {
   };
 
   useEffect(() => {
-    if (productList.length !== 0) {
-      setDiscountList(getDiscountList());
-      setNewreleaseList(getNewRelease());
-      setHighrateList(getHighRating());
-      setDisplayList(discountList)
-    }
-  }, [])
+    setDisplayList(discountList.slice(0, 7))
+  }, [discountList])
 
   useEffect(() => {
-    setDiscountList(getDiscountList());
-    setNewreleaseList(getNewRelease());
-    setHighrateList(getHighRating());
-    setDisplayList(discountList)
+    getDiscountList()
+    getNewRelease()
+    getHighRating()
+    setDisplayList(discountList.slice(0, 7))
     dispatch(setFilteredProduct(discountList));
-  }, [productList]);
+  }, []);
 
   const checkBoughtProduct = (id) => {
     let bought = false
@@ -99,11 +96,9 @@ const HomeCategory = () => {
     }
     return bought
   }
-
   useEffect(() => {
     handleCategoryList();
   }, [category, productList]);
-  console.log(category)
   return (
     <section id="home-category">
       <div className="home-category-navbar">
@@ -129,7 +124,7 @@ const HomeCategory = () => {
       </div>
       <div className="home-category-list-container container">
         <ul className="home-category-list row">
-          {displayList.map((item, index) => {
+          {displayList?.map((item, index) => {
             const { id, gameImage, name, price, discount } = item;
             const added = cartProduct.filter(game => game.id === item.id)
             return (
@@ -183,7 +178,7 @@ const HomeCategory = () => {
               </div>
             );
           })}
-          {displayList.length !== 0 && (
+          {displayList?.length !== 0 && (
             <Link to="/game" className="home-category-item col-12 col-s-6 col-md-4 col-lg-3" onClick={() => dispatch(sortProduct(category))}>
               <div className="img-container">
                 <img src={discountList[8].gameImage} className="game-image" />
