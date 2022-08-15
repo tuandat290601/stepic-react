@@ -108,14 +108,63 @@
     .genres-list
         width: 100%
         display: flex
+        flex-direction: column
         list-style: none
-        flex-wrap: wrap
-        .genre
-            width: 50%
+        .selected-genre
+            width: 100%
             display: flex
-            align-items: flex-start
+            border: 1px solid var(--orange-color)
+            border-radius: 5px
+            cursor: pointer
+            padding: 0 5px
+            margin-bottom: 10px
+            position: relative
+            .checked-selected-list
+                width: 90%
+                display: flex
+                span
+                    width: 100%
+                    text-overflow: ellipsis
+                    white-space: nowrap
+                    overflow: hidden
+                    font-size: 14px
+                span:first-child
+                    margin-left: 0
+            .empty-selected-genre
+                font-size: 14px
+                display: flex
+                justify-content: space-between
+            .selected-genre-icon
+                position: absolute
+                height: 100%
+                right: 5px
+                top: 0px
+                display: flex
+                align-items: center
+                transition: .4s ease all
+                svg
+                    font-size: 12px
+            .rotate-90
+                transform: rotateZ(-180deg)
+        .genre
+            width: 100%
+            display: flex
+            align-items: center
+            justify-content: space-between
             margin-bottom: 5px
+            padding: 2px 5px
+            transition: .4s ease all
+            border-radius: 5px
+            position: relative
             label
-                font-size: 12px
+                font-size: 14px
                 line-height: 15px
-                margin-left: 3px
+                width: 100%
+            input
+                opacity: 0
+
+        .genre:hover
+            background: var(--orange-color)
+        .checked-genre
+            background: var(--orange-color)
+            color: var(--white-color)

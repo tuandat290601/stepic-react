@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilteredProduct, sortProduct } from "../../features/product/productSlice"
 import { formatPrice } from "../../ultils/formatPriceToUSD"
+import { BsChevronDown } from "react-icons/bs";
 import "./Filter.sass"
 
 const Filter = () => {
@@ -14,6 +15,7 @@ const Filter = () => {
 
   const genreList = [...new Set([].concat(...productList.map(game => game.genres)))]
   const [checkedGenre, setCheckedGenre] = useState([])
+  const [isCheckListOpen, setIsCheckListOpen] = useState(false)
 
   const checkGameValidChecked = (game) => {
     let valid = true
@@ -50,7 +52,6 @@ const Filter = () => {
       newList = newList.filter(game => {
         return checkGameValidChecked(game)
       })
-      console.log(newList)
       dispatch(setFilteredProduct(newList))
     }
     dispatch(sortProduct(sort))
@@ -70,12 +71,23 @@ const Filter = () => {
             Genres
           </h5>
           <ul className="genres-list">
-            {genreList.map((genre, index) => {
-              return <li key={index} className="genre">
+            <div className="selected-genre" onClick={() => setIsCheckListOpen(!isCheckListOpen)}>
+              {checkedGenre.length !== 0 ? <div className='checked-selected-list'>
+                {<span>
+                  {checkedGenre.toString()}
+                </span>}
+              </div> : <span className='empty-selected-genre'>Select some genres</span>}
+              <div className={isCheckListOpen ? "selected-genre-icon rotate-90" : "selected-genre-icon"}>
+                <BsChevronDown />
+              </div>
+            </div>
+            {isCheckListOpen && genreList.map((genre, index) => {
+              return <li key={index} className={checkedGenre.indexOf(genre) !== -1 ? "genre checked-genre" : "genre"}>
+                <label htmlFor={genre}>{genre}</label>
                 <input type="checkbox" name={genre} id={genre} onChange={(e) => {
                   handleChecked(e.target.name)
                 }} />
-                <label htmlFor={genre}>{genre}</label>
+                <span class="checkmark"></span>
               </li>
             })}
           </ul>
